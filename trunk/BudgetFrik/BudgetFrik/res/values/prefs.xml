@@ -1,0 +1,18 @@
+<resources>
+<!-- Preferences -->
+<string name="pref.currency">Default Currency</string>
+<string name="pref.csv">CSV Separator</string>
+<string name="pref.csv.key">default.csv.separator</string>
+<string name="pref.currency.key">default.currency</string>
+<!-- Menu -->
+<string name="menu_pref_clear">Clear All Expenses</string>
+<string name="menu_pref_update">Update Currencies</string>
+<!-- Strings -->
+<string name="txt_pref_confirm">Confirm</string>
+<string name="txt_pref_clear_warn">Are you sure?\nThis action will delete all expenses in the database.\nThis action is not undoable.</string>
+<string name="txt_pref_curr_update_title">Updating Currency Exchange Rates</string>
+<string name="txt_pref_curr_update_init">Connecting to currency WebService...</string>
+<string name="txt_pref_curr_update_down">Downloading exchange rates...</string>
+<string name="txt_pref_curr_update_parse">Analyzing exchange rates...</string>
+<string name="txt_pref_curr_update_save">Updating exchange rates...</string>
+</resources>

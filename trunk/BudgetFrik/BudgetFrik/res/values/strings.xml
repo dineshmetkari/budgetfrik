@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="arts">Hobbies and Art</string>
+    <string name="bills">Bills and Other Spenditures</string>
+    <string name="coffee">Coffee, Tea and Snacks</string>
+    <string name="games">Games, Lotto, Gambling</string>
+    <string name="news">Newspapers, Books and Magazines</string>
+    <string name="tools">DIY and Tools</string>
+    <string name="tv">TV, Movies and Entertainment</string>
+    <string name="groceries">Food and Groceries</string>
+    <string name="eatout">Restaurants, Delivery and Take Aways</string>
+    <string name="clothing">Clothing and Fashion</string>
+    <string name="electronics">Electronics and Gadgets</string>
+    <string name="mobility">Mobile Top-Ups, Downloads, Ringtones, etc.</string>
+    <string name="gifts">Charity and Gifts</string>
+    <string name="publict">Public Transport and Taxis</string>
+    <string name="car">Car and Fuel</string>
+    <string name="air">Air Travel</string>
+    <string name="home">Rent and Household</string>
+    <string name="sports">Gym, Sports and Fitness</string>
+    <string name="hotel">Accommodation</string>
+    <string name="office">Office</string>
+    <!-- App Strings -->
+	<string name="hello">Please select a category.</string>
+    <string name="app_name">Budget Frik</string>
+	<string name="notes">Notes</string>        
+	<string name="cost_title">Enter cost</string>
+	<string name="file_dialog_title">Save as CSV</string>
+	<string name="file_dialog_message">Filename:</string>
+	<string name="menu_curr">Change Currency</string>
+	<string name="menu_main">Main</string>
+	<string name="dialog_progress">Progress</string>
+	<string name="preferences">Preferences</string>
+	<!-- Reports -->
+	<string name="exp_heading" >Expenses Report</string>
+	<string name="this_d_exp" >Today's Expenses:</string>
+	<string name="last_d_exp">Yesterday's Expenses:</string>
+	<string name="this_w_exp">This Week's Expenses:</string>
+	<string name="last_w_exp">Last Week's Expenses:</string>
+	<string name="this_m_exp">This Month's Expenses:</string>
+	<string name="last_m_exp">Last Month's Expenses:</string>
+	<string name="this_y_exp">This Year's Expenses:</string>
+	<string name="last_y_exp">Last Year's Expenses:</string>
+	<string name="total_exp">Total Expenses To Date:</string>
+	<string name="currency_txt">Currency:</string>
+	
+</resources>

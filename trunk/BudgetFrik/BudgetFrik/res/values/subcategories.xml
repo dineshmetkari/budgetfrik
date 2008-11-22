@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="arts">
+		<item>Music Supplies</item>
+		<item>Paint Supplies</item>
+		<item>Writing Supplies</item>
+		<item>Drawing Supplies</item>
+		<item>Custume Supplies</item>
+		<item>Handwork Supplies</item>
+		<item>Art Supplies</item>
+		<item>Paintings</item>
+	</string-array>
+
+	<string-array name="bills">
+		<item>Energy Bill</item>
+		<item>Heating Bill</item>
+		<item>Landline Bill</item>
+		<item>Cellphone Bill</item>
+		<item>Water Bill</item>
+		<item>Broadband Bill</item>
+		<item>Cable Bill</item>
+		<item>Dial-Up Bill</item>
+		<item>Calling Cards</item>
+		<item>Parking Fees</item>
+		<item>Fines</item>
+		<item>Banking Fees</item>
+		<item>Services Fees</item>
+		<item>Other Fees</item>
+		<item>Landline Long Distance</item>
+		<item>Tips</item>
+		<item>Late Fees</item>
+		<item>Lost Money</item>
+		<item>National And Local Post</item>
+		<item>International Post</item>
+		<item>Lawyer/Litigation</item>
+	</string-array>
+
+	<string-array name="coffee">
+		<item>Coffee</item>
+		<item>Tea</item>
+		<item>Chocolate</item>
+		<item>Softdrink Drink, Etc.</item>
+		<item>Snacks</item>
+		<item>Cake</item>
+		<item>Pastry</item>
+		<item>Cigarettes</item>
+		<item>Tobaco</item>
+		<item>Cigars</item>
+		<item>Gum</item>
+		<item>Ice-Cream Cone</item>
+	</string-array>
+
+	<string-array name="games">
+		<item>Instant Lotto</item>
+		<item>Lotto Tickets</item>
+		<item>Bets</item>
+		<item>Sports Bets</item>
+		<item>Horse Bets</item>
+		<item>Dog Bets</item>
+		<item>Casino</item>
+		<item>Video Games</item>
+		<item>Game Subscriptions</item>
+	</string-array>
+
+	<string-array name="news">
+		<item>Newspaper</item>
+		<item>Magazine</item>
+		<item>Book</item>
+		<item>Paperback</item>
+		<item>Fanzine</item>
+		<item>Book Download</item>
+		<item>Book Club</item>
+		<item>Magazine Subscription</item>
+		<item>Newspaper Subscription</item>
+		<item>Maps</item>
+	</string-array>
+
+	<string-array name="tools">
+		<item>Misc. Hardware</item>
+		<item>Precision Tools</item>
+		<item>Car Tools</item>
+		<item>Bike Tools</item>
+		<item>Computer Tools</item>
+		<item>Diy Supplies</item>
+		<item>Paint</item>
+		<item>Wood</item>
+		<item>Plaster</item>
+	</string-array>
+
+	<string-array name="tv">
+		<item>Movie Tickets</item>
+		<item>Concert Tickets</item>
+		<item>Opera Tickets</item>
+		<item>Teater Tickets</item>
+		<item>Dance Tickets</item>
+		<item>Event Tickets</item>
+		<item>Pay Per View</item>
+		<item>Pay Per Download</item>
+		<item>Movie Rental</item>
+		<item>Book Rental</item>
+		<item>Dvd</item>
+		<item>Cd</item>
+		<item>Music Download</item>
+		<item>Movie Download</item>
+		<item>Book Download</item>
+		<item>Game Tickets</item>
+	</string-array>
+
+	<string-array name="groceries">
+		<item>Milk</item>
+		<item>Vegetables And Fruit</item>
+		<item>Meat</item>
+		<item>Chicken</item>
+		<item>Etnic Food</item>
+		<item>Juice</item>
+		<item>Junk Food</item>
+		<item>Ice Cream</item>
+		<item>Six-Pack Beer</item>
+		<item>Market Soft Drinks</item>
+		<item>Hard Liquor</item>
+		<item>Wine Bottle</item>
+	</string-array>
+
+	<string-array name="eatout">
+		<item>Dinner</item>
+		<item>Lunch</item>
+		<item>Breakfast</item>
+		<item>Brunch</item>
+		<item>Take-Away</item>
+		<item>Delivery</item>
+		<item>Pizza</item>
+		<item>Mexican</item>
+		<item>Indian</item>
+		<item>Chinese</item>
+		<item>Meal Drinks</item>
+		<item>Soft Drinks</item>
+		<item>Beer</item>
+		<item>Wine</item>
+		<item>Cocktails</item>
+		<item>Bar Food</item>
+	</string-array>
+
+	<string-array name="clothing">
+		<item>Shoes</item>
+		<item>Snickers</item>
+		<item>Sports Clothing</item>
+		<item>Casual Clothing</item>
+		<item>Winter Clothing</item>
+		<item>Summer Clothing</item>
+		<item>Beach Clothing</item>
+		<item>Hats</item>
+		<item>Business Clothing</item>
+		<item>Clothing Rental</item>
+		<item>Dry-Cleaning</item>
+		<item>Laundry</item>
+		<item>Gloves</item>
+		<item>Sport Shoes</item>
+	</string-array>
+
+	<string-array name="electronics">
+		<item>Desktop Pc</item>
+		<item>Netbook Pc</item>
+		<item>Notebook Pc</item>
+		<item>Mac</item>
+		<item>Server</item>
+		<item>Software</item>
+		<item>Hardware</item>
+		<item>Digital Music Player</item>
+		<item>Dvd Player</item>
+		<item>Cd Player</item>
+		<item>Record Player</item>
+		<item>Digital Video Player</item>
+		<item>Game Console</item>
+		<item>Cellphone</item>
+		<item>Phone Accessories</item>
+		<item>Game Accessories</item>
+		<item>Gps</item>
+	</string-array>
+
+	<string-array name="mobility">
+		<item>Top-Up</item>
+		<item>Game Download</item>
+		<item>Ringtone</item>
+		<item>Application Download</item>
+		<item>Mobile Subscription</item>
+		<item>Mobile Long-Distance</item>
+		<item>Mobile Battery</item>
+		<item>Mobile Charger</item>
+	</string-array>
+
+	<string-array name="gifts">
+		<item>Children'S Gifts</item>
+		<item>Expensive Gifts</item>
+		<item>Small Gifts</item>
+		<item>Charity</item>
+		<item>Greeting Card</item>
+		<item>Gift Wrapping</item>
+		<item>Spare Change</item>
+		<item>Gift Card</item>
+		<item>Christmas Presents</item>
+	</string-array>
+
+	<string-array name="publict">
+		<item>Train Trip</item>
+		<item>Subway Trip</item>
+		<item>Bus Trip</item>
+		<item>Train Card</item>
+		<item>Subway Card</item>
+		<item>Bus Card</item>
+		<item>Taxi Trip</item>
+		<item>Boat Trip</item>
+		<item>Boat Card</item>
+	</string-array>
+
+	<string-array name="car">
+		<item>Car Payments</item>
+		<item>Insurance</item>
+		<item>Car Taxes</item>
+		<item>Car Service</item>
+		<item>Parking</item>
+		<item>Break-Down</item>
+		<item>Car Accessories</item>
+		<item>Toll</item>
+		<item>Motor Tickets</item>
+		<item>License Fees</item>
+		<item>Car School</item>
+	</string-array>
+
+	<string-array name="air">
+		<item>Extra Luggage</item>
+		<item>Airport Parking</item>
+		<item>Airport Fee</item>
+		<item>Airport Transport</item>
+		<item>Reissue Tickets Fee</item>
+		<item>Rebook Trip Fee</item>
+		<item>Airport Food</item>
+		<item>Airport Shopping</item>
+	</string-array>
+
+	<string-array name="home">
+		<item>Rent</item>
+		<item>Mortgage</item>
+		<item>House Cleaning</item>
+		<item>Housekeeper</item>
+		<item>Babysitter</item>
+		<item>House Reparations</item>
+		<item>House Expansions</item>
+		<item>Running Costs</item>
+		<item>Furniture</item>
+		<item>Light Bulbs</item>
+		<item>Keys</item>
+		<item>Locks And Doors</item>
+		<item>Windows</item>
+		<item>Paint</item>
+		<item>Wallpaper</item>
+		<item>Floors</item>
+		<item>Kitchenware</item>
+		<item>Bedding</item>
+		<item>Pest Control</item>
+	</string-array>
+
+	<string-array name="sports">
+		<item>Sport Supplies</item>
+		<item>Sports Club Fee</item>
+		<item>Gym Membership</item>
+		<item>Golf Club Membership</item>
+		<item>Camping Gear</item>
+	</string-array>
+
+	<string-array name="hotel">
+		<item>Hotel</item>
+		<item>B&amp;B</item>
+		<item>Motel</item>
+		<item>Conference</item>
+		<item>Holiday</item>
+		<item>Tour</item>
+		<item>Hotel Food</item>
+		<item>Hostel</item>
+	</string-array>
+
+	<string-array name="office">
+		<item>Office Supplies</item>
+		<item>Charity Tickets</item>
+		<item>Raffle Tickets</item>
+		<item>Christmas Exchange</item>
+		<item>Travel Expenses</item>
+		<item>Petty Cash</item>
+		<item>Per Diem</item>
+		<item>Office Event</item>
+	</string-array>
+
+</resources>
