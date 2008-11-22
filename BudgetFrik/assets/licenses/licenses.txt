@@ -1,0 +1,68 @@
+This work is protected under the following CreativeCommons license:
+
+license.html
+
+Erkännande-Ickekommersiell-Dela Lika 2.5 Sverige
+Attribution-Noncommercial-Share Alike 2.5 Sweden
+Atribución-No comercial-Licenciamiento Recíproco 2.5 Suecia
+Atribución-No Comercial-Licenciar Igual 2.5 Suecia
+
+Du får:
+
+    * att Dela — att kopiera, distribuera och sända verket
+    * att Remixa — att skapa bearbetningar
+
+På följande villkor:
+
+      Erkännande. Du måste ange upphovsmannen och/eller licensgivaren på det sätt 
+      de anger (men inte på ett sätt som antyder att de godkänt eller rekommenderar 
+      din använding av verket).
+
+      Attribute this work:
+      What does "Attribute this work" mean?
+      The page you came from contained embedded licensing metadata, 
+      including how the creator wishes to be attributed for re-use. 
+      You can use the HTML here to cite the work. Doing so will also include 
+      metadata on your page so that others can find the original work as well.
+       
+
+      Ickekommersiell. Du får inte använda verket för kommersiella ändamål.
+
+      Dela Lika. Om du ändrar, bearbetar eller bygger vidare på verket får du endast 
+      distribuera resultatet under samma licens eller en liknande licens som denna.
+    * Vid all återanvändning och distribution måste du informera om licensvillkoren 
+    	som gäller för verket. Det bästa sättet att göra detta är genom en länk till 
+    	den här webbsidan.
+    * Undantag från villkoren ovan kan meddelas av upphovsrättsinnehavaren.
+    * Ingenting i denna licens begränsar upphovsmannens ideella rätt.
+
+=============================================================
+
+Commercial use:
+
+if you wish to make commercial use of this product or derive commercial 
+works you must contact the author.
+
+==============================================================
+
+Portions of this work are derived or use code and media from:
+
+
+Icons:
+Nuvola action icons - LGPL3.0 lgpl_3.0.txt
+Silk icons - by Mark James http://creativecommons.org/licenses/by/2.5/
+Crystal icons - by Everaldo Coelho LGPL3.0 lgpl_3.0.txt 
+Frédéric Bellaiche (Bear) - GPL 2.0 gpl2.0.txt
+DBGthekafu@commons.wikimedia.org - GPL 2.0 gpl2.0.txt
+Pepetps@commons.wikimedia.org - GNU Free Documentation License 1.2 http://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License
+
+Portions of the code:
+Android API Demos - Google Inc. - http://www.apache.org/licenses/LICENSE-2.0
+
+==============================================================
+EULA
+
+By using this software the user agrees to hold harmless the software 
+licensor in the event that the software causes damage to the user's 
+computer or data, the licensor can be held liable for damage that arises 
+through improper or proper use of the software.

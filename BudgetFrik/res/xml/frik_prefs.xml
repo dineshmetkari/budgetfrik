@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory android:title="@string/preferences" 
+	android:orderingFromXml="true">
+	<EditTextPreference 
+		android:defaultValue="," 
+		android:key="@string/pref.csv.key" 
+		android:title="@string/pref.csv">
+	</EditTextPreference>
+	<ListPreference 
+	android:key="@string/pref.currency.key" 
+	android:title="@string/pref.currency"></ListPreference>
+</PreferenceCategory>
+</PreferenceScreen>
