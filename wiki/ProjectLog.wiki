@@ -1,0 +1,59 @@
+#summary Periodic project status
+
+= Introduction =
+
+BudgetFrik is a mobile application that should help the user to keep track of her/his expenses.
+
+
+= Releases =
+
+== Beta 1 (current) ==
+
+First Beta delivering basic functionality and usability
+
+
+  * Default expenses categories and subcategories
+  * Default currencies updatable through a WebService from ECB
+  * Preferences handling
+  * Default report with periodical expenses
+  * Simplex sorting of categories/Subcategories (Last Used First)
+
+
+== Beta 2 (Q1-2009) ==
+
+  * Calendar View
+  * Edit/Delete previous expenses
+  * Fix Bugs
+  * Make Reports a 1st class Activity
+  * Add report by category
+
+== Beta 3(Q2-2009) ==
+
+  * Add more WebServices
+  * Start with features on the road map
+  * Release GA (General Availability)
+  * Redo artwork and usability based on feedback and use
+  * Test on a real phone
+
+== GA 1.0(Q2-2009) ==
+
+= Road Map (a.k.a wish list)=
+
+   * Geo Tag Expenses
+   * Password protect reports
+   * Historical currency exchange calculation
+   * Graphical reports and expenses
+   * Bluetooth, SMS and EMail Reports
+   * Integrate with Google Apps
+   * Integrate with Facebook
+   * Backups and merges
+   * J2ME Version
+   * IPhone Version
+   * Enterprise Version (opensource but not free) - Custom reporting/ERP integration
+   * Add/Remove expenses categories/subcategories
+   * Smart Category Sorting
+   * Handle Different Layouts
+   * Expose Reports to external applications
+   * Receive expenses via SMS
+   * Track device expenses (roaming, calls, SMS, MMS, GPRS/EDGE/3G/4G, Wifi, Store)
+   * Attach receipt images to expenses
