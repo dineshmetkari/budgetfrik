@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/LinearLayout01" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content">
+<ImageView android:layout_gravity="top|left" android:id="@+id/DialogIcon" 
+   android:layout_width="64px" android:layout_height="64px"></ImageView><TextView 
+	android:id="@+id/DialogTitle" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content"
+	 android:text="@string/cost_title" 
+	 android:capitalize="words" 
+	 android:textAppearance="@android:style/TextAppearance.DialogWindowTitle" 
+	 android:gravity="center" android:layout_gravity="top|center" 
+	 android:clickable="false" android:editable="false" 
+	 android:layout_marginTop="10sp" android:layout_marginLeft="32sp" 
+	 android:drawableBottom="@android:drawable/divider_horizontal_dim_dark">
+</TextView>
+
+
+</LinearLayout>
