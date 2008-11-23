@@ -1,6 +1,7 @@
 #summary Product Description
 #labels Featured,ProductDescription
 
+=Product Description=
 
 BudgetFrik is your portable's budget control and management tool.
 
