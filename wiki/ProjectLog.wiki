@@ -1,9 +1,20 @@
 #summary Periodic project status
+#labels Featured,Phase-Requirements
 
 = Introduction =
 
 BudgetFrik is a mobile application that should help the user to keep track of her/his expenses.
 
+= Help Needed =
+
+I need your kind and trustworthy help for the following:
+
+  * Artwork - This is very urgent and important
+  * Testing during on your everyday life (I'm doing the same)
+  * Test in a real phone
+  * Suggestions, always welcome
+
+I cannot pay you, but you will contribute to Open Source. I will place your name under the credits screen (once it's done).
 
 = Releases =
 
@@ -35,6 +46,7 @@ First Beta delivering basic functionality and usability
   * Release GA (General Availability)
   * Redo artwork and usability based on feedback and use
   * Test on a real phone
+  * Credits Screen
 
 == GA 1.0(Q2-2009) ==
 
@@ -58,3 +70,7 @@ First Beta delivering basic functionality and usability
    * Receive expenses via SMS
    * Track device expenses (roaming, calls, SMS, MMS, GPRS/EDGE/3G/4G, Wifi, Store)
    * Attach receipt images to expenses
+   * Auto Update
+   * Integration with Google Calendar
+   * Integration with Google Data
+   * Other 3rd party integrations
