@@ -1,0 +1,34 @@
+#summary Project Documentation
+#labels Featured,Phase-Design
+
+= Introduction =
+
+Add your content here.
+
+= Getting Started =
+
+= Entering Expenses =
+
+== Changing Currency ==
+
+= Viewing/Editing Expenses =
+
+= Viewing Reports =
+
+== Date Report ==
+
+== Category Report ==
+
+== Changing Report Currency ==
+
+== Saving Report ==
+
+= Preferences =
+
+== Changing Default Currency ==
+
+== Updating Exchange Rates ==
+
+== Deleting Expenses ==
+
+== Backing Up Data ==
