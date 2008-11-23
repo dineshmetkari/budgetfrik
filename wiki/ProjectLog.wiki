@@ -26,6 +26,7 @@ First Beta delivering basic functionality and usability
   * Fix Bugs
   * Make Reports a 1st class Activity
   * Add report by category
+  * Add data validations
 
 == Beta 3(Q2-2009) ==
 
