@@ -25,10 +25,6 @@ For those frequent travelers BudgetFrik can accept entries in any currency and p
 
 Your expenses are yours, share only with who you want. Password protect the reports.
 
-Disclosure:
-
-I'm an HP employee in Sweden and I work on this during my free time.
-
 
 = Getting Started =
 
@@ -297,3 +293,7 @@ You are your own worst enemy, so click OK on the dialog below if you think you c
  * Nice people who shares their graphic design on commons.wikimedia.com
  * Nice people from Google who decided to make an exciting open mobile client development platform (breath now).
  
+
+Disclosure:
+
+I'm an HP employee in Sweden and I work on this during my free time.
