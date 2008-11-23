@@ -14,7 +14,7 @@ Meanwhile this is intended for developers only, so you'll have to download the <
 
 *Simple one-liner*
 {{{
-adb install <path to the download file>BudgetFrik.apk
+adb install <path to the download file>BudgetFrik20081123.apk
 }}}
 
 For more complicated stuff (multiple emulators or mobile phone), see the <a href="http://code.google.com/android/reference/adb.html#move"> adb documentation</a>
@@ -61,7 +61,7 @@ adb uninstall org.avelino.mobile.android.budgetfrik
 
 *Simple one-liner*
 {{{
-adb install -r <path to the download file>BudgetFrik.apk
+adb install -r <path to the download file>BudgetFrik<whateverversion>.apk
 }}}
 
 For more complicated stuff (multiple emulators or mobile phone), see the <a href="http://code.google.com/android/reference/adb.html#move"> adb documentation</a>
@@ -91,26 +91,26 @@ Your initial screen looks like this:
 Each nice little icon (see the licenses for credits) corresponds to a category of expenses. BudgetFrik comes preloaded with many common (At least in my little world) everyday expenses, and each icon represents (poorly) each one. With the phone's arrows (or emulator's) select them and see the description on top. They are sorted, well, chaotically. They will sort themselves following the _last used first_ principle.
 
 Here they are:
-    *Hobbies and Art
-    *Bills and Other Expenditures
-    *Coffee, Tea and Snacks
-    *Games, Lotto, Gambling
-    *Newspapers, Books and Magazines
-    *DIY and Tools
-    *TV, Movies and Entertainment
-    *Food and Groceries
-    *Restaurants, Delivery and Take Aways
-    *Clothing and Fashion
-    *Electronics and Gadgets
-    *Mobile Top-Ups, Downloads, Ringtones, etc.
-    *Charity and Gifts
-    *Public Transport and Taxis
-    *Car and Fuel
-    *Air Travel
-    *Rent and Household
-    *Gym, Sports and Fitness
-    *Accommodation
-    *Office
+    * Hobbies and Art
+    * Bills and Other Expenditures
+    * Coffee, Tea and Snacks
+    * Games, Lotto, Gambling
+    * Newspapers, Books and Magazines
+    * DIY and Tools
+    * TV, Movies and Entertainment
+    * Food and Groceries
+    * Restaurants, Delivery and Take Aways
+    * Clothing and Fashion
+    * Electronics and Gadgets
+    * Mobile Top-Ups, Downloads, Ringtones, etc.
+    * Charity and Gifts
+    * Public Transport and Taxis
+    * Car and Fuel
+    * Air Travel
+    * Rent and Household
+    * Gym, Sports and Fitness
+    * Accommodation
+    * Office
 
 To enter an expense in a particular, just click an icon. Then a dialog like this pops:
 
@@ -131,15 +131,75 @@ Currently there is only one report.
 
 == Date Report ==
 
+From the Main Menu, click the *Menu* button on your phone/emulator and select *Reports*.
+An invisible progress bar will show you the progress if and only if you are wearing the emperor's new clothes at the same time.
+Then you should see a screen like this:
 
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/2qtZCLJNkMaQHyZEJsWfCA"><img src="http://lh5.ggpht.com/_kwr3zmbEX4M/SSmR2P9bKSI/AAAAAAAAAFY/cTH-wuyyTas/s400/DateReport.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Date Report</td></tr></table>
+
+Depends on the amount of data you have inserted what you will see. These are the headings and values:
+
+ * Today's Expenses
+ * Yesterday's Expenses
+ * This week's Expenses
+ * Last week's Expenses
+ * This month's Expenses
+ * Last month's Expenses
+ * This year's Expenses
+ * Last year's Expenses
+ * Total Expenses
+
+
+The values are the lump sum of expenses made on the day/week/month/year/ever.  At the bottom it will display what currency is used.  The good: All expenses are converted to the target currency using the application's exchange (which you can update automatically).  The not so good: The conversion is fixed i.e. not using the rate of date that the expense happened, but all will be converted to the application's exchange (you know you can update they, don't you?)
+
+=== Changing Report Currency ===
+
+Easy, just click *Menu* button on your phone/emulator, then *Currency*, select the new currency and then wow! The values are re-calculated using the exiting exchange rate(did I mention about the exchange rate update, didn't I).
+
+Here's how it looks:
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/3Z2LhLC6s7ok2aBgZPucDw"><img src="http://lh5.ggpht.com/_kwr3zmbEX4M/SSmR1YEGfOI/AAAAAAAAAFI/fPCwMDMmZzs/s400/ChangeCurrency.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Change Currency</td></tr></table>
+
+=== Saving Reports ===
+
+Easy, just click *Menu* button on your phone/emulator, then *Save as CSV*. Type in the name of the file (by default the current date is used) and done.
+
+The reports are saved in the `/data/data/org.avelino.mobile.android.budgetfrik/files` directory.
+
+You can download them from your phone/emulator using adb from the Android SDK (I don't know if it is possible to 'synch' from a real phone or something) with the following command:
+
+{{{
+
+adb pull /data/data/org.avelino.mobile.android.budgetfrik/files/<your_file>.csv <your_file>.csv
+
+}}}
+
+You can open them using your favorite (or only) spreadsheet program like OpenOffice or Excel.  In some OSs and spreadsheets (I tried in a Swedish layout Asus PC), MS uses a separator different from the comma (*,*) for the CSV (comma separated values), you can change this in the preferences menu.
+
+The file looks like this:
+
+{{{
+
+Heading;Value
+"Todays Expenses:";$386.00
+"Yesterdays Expenses:";$0.00
+"This Weeks Expenses:";$0.00
+"This Weeks Expenses:";$386.00
+"This Months Expenses:";$386.00
+"This Months Expenses:";$0.00
+"This Years Expenses:";$386.00
+"This Years Expenses:";$0.00
+"Total Expenses To Date:";$386.00
+"Currency:";SEK
+
+}}}
+
+Easy to work with.
 
 == Category Report ==
 
 Maybe in the next release
 
-== Changing Report Currency ==
-
-== Saving Report ==
 
 = Preferences =
 
@@ -148,5 +208,3 @@ Maybe in the next release
 == Updating Exchange Rates ==
 
 == Deleting Expenses ==
-
-== Backing Up Data ==
