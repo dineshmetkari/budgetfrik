@@ -1,5 +1,5 @@
 #summary Project Documentation
-#labels Featured,Phase-Design
+#labels Featured,Phase-Design,Manual
 
 = Introduction =
 
@@ -8,7 +8,9 @@
 
 == Installation == 
 
-Since I haven't ponied up with the 25 quid, the app is not in the Google Android Store. Maybe for the 1.0 and then I'll charge a dime a download until I get the investment back.
+Since I haven't ponied up with the 25 quid, the app is not in the Google Android Store. 
+
+Maybe for the 1.0 and then I'll charge a dime a download until I get the investment back.
 
 Meanwhile this is intended for developers only, so you'll have to download the <a href="http://code.google.com/android/download.html">Android SDK Download</a> and the latest <a href="http://code.google.com/p/budgetfrik/downloads/detail?name=BudgetFrik.apk"> BudgetFrik APK</a> with the application itself and use the tools to upload to your phone/emulator.
 
@@ -116,10 +118,17 @@ To enter an expense in a particular, just click an icon. Then a dialog like this
 
 <table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/sOD--ZLs5OhB2ZoZYKrJYw"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SSmSDjxfpKI/AAAAAAAAAFo/D3xIgP8osSc/s400/ExpenseEntry.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Entering Expense</td></tr></table>
 
-Don't worry, it is made so you only enter as little info as possible. 
+Don't worry, it is made so you only enter as little info as possible. _Just enter the amount and click *Ok*_
+
+Or if you want to have more control... This is the name of the game.
+
 First, a list of subcategories is available, by default you don't have to select any and right now it makes no difference but it will in the future. The subcategories are arranged following the _last used first_ principle and then alphabetically. Finally some order.
+
 Then, the currency is selected by default (you can change this), then you enter the amount. 
-To enter the amount you can just click the calculator-like buttons or use the keyboard. One day I will add the choice to change the layout to phone-like if you feel more comfortable. Optionally, you can enter some text. Click OK and you are done.  To erase something just click the *c* button. I added a double zero for those big expenders. Click cancel if you changed your mind. 
+
+To enter the amount you can just click the calculator-like buttons or use the keyboard. One day I will add the choice to change the layout to phone-like if you feel more comfortable. 
+
+Optionally, you can enter some text. Click OK and you are done.  To erase something just click the *c* button. I added a double zero for those big expenders. Click cancel if you changed your mind. 
 
 = Viewing/Editing Expenses =
 
@@ -152,6 +161,8 @@ Depends on the amount of data you have inserted what you will see. These are the
 
 The values are the lump sum of expenses made on the day/week/month/year/ever.  At the bottom it will display what currency is used.  The good: All expenses are converted to the target currency using the application's exchange (which you can update automatically).  The not so good: The conversion is fixed i.e. not using the rate of date that the expense happened, but all will be converted to the application's exchange (you know you can update they, don't you?)
 
+One word of ... well a feature. Don't click the *back* button to go back to the main menu. Click *Menu* and then *Back*.  I'm working on that for the next release.
+
 === Changing Report Currency ===
 
 Easy, just click *Menu* button on your phone/emulator, then *Currency*, select the new currency and then wow! The values are re-calculated using the exiting exchange rate(did I mention about the exchange rate update, didn't I).
@@ -160,9 +171,13 @@ Here's how it looks:
 
 <table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/3Z2LhLC6s7ok2aBgZPucDw"><img src="http://lh5.ggpht.com/_kwr3zmbEX4M/SSmR1YEGfOI/AAAAAAAAAFI/fPCwMDMmZzs/s400/ChangeCurrency.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Change Currency</td></tr></table>
 
+I'm working on precision (for those that use Yen's or Turkish Lira) problems when changing currency in the reports. As a workaround, change the default currency and you should get better results.
+
 === Saving Reports ===
 
 Easy, just click *Menu* button on your phone/emulator, then *Save as CSV*. Type in the name of the file (by default the current date is used) and done.
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/O_lj0u9o9ZtiA3WqxooOIQ"><img src="http://lh4.ggpht.com/_kwr3zmbEX4M/SSmSEXBJDKI/AAAAAAAAAGI/HBqXR8CjrqA/s400/ReportSaveAs.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Save as CSV</td></tr></table>
 
 The reports are saved in the `/data/data/org.avelino.mobile.android.budgetfrik/files` directory.
 
@@ -200,11 +215,57 @@ Easy to work with.
 
 Maybe in the next release
 
-
 = Preferences =
+
+What application would be complete without preferences, settings, properties or configuration?
+
+After all you are a control freak, that's why you have this application on your phone. So you can control the application that controls your expending. Makes sense. '
+
+On the main menu click *Menu* then *Preferences* and this nice beautiful screen will greet you. 
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/-QpjDYPZHargI-JripF06g"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SSmSEJblOfI/AAAAAAAAAGA/DiBfok8CAHw/s400/Preferences.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Preferences</td></tr></table>
+
+Don't complain is the default Android preferences, I still have to figure how to tweak it so it looks nicer.
+
+To go back to the main menu, click the back button on your phone/emulator.
 
 == Changing Default Currency ==
 
+Easy, just click the *Default Currency* option and a list like this pops. The current default currency is selected, scroll and choose your new default currency.
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/x3NdOXncaa49wSQ-IrSdMg"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SSmR1pontrI/AAAAAAAAAFQ/BW-4L1gJnTc/s400/CurrenciesUpdates.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Change Default Currency</td></tr></table>
+
+This will cause that all the entries you make will be done by default (you can change in the entries dialog) in that currency.  Same goes for reports.
+
+== CSV Separator ==
+
+If you (for some alien reason) want to change the CSV separator from the default comma, click *Menu*, then *CSV Separator* on the Preferences screen and change the value. I know, from experience that for in Microsoft Excel in Windows XP Pro Swedish locale, the separator is semi-colon *;*.
+
 == Updating Exchange Rates ==
 
+As of now updating the exchange rate is a good idea if you are connected to Internet and you are doing a report.  It is also a good idea if you want to capture data in other than the supplied currencies (USD/GBP/EUR/MXN/SEK). Otherwise it makes not much sense.
+
+From the *Preferences* screen click *Menu*, then select *Update Currencies*. An invisible progress bar at the top shows you how nicely is updating. Then just a dialog in the middle, dismiss with the *back* button and you are sorted.
+
+- No, you cannot see the rates - for now.
+
+The currencies are updated from the European Central Bank with just what they think are the most important currencies. If your currency is not there complain to them.  Also, the precision is not great, specially for the people that use the Yen and Turkish Lira.
+
 == Deleting Expenses ==
+
+Ok, I included this for testing purposes. Also if you want to clean your tracks, etc.
+
+From the *Preferences* screen click *Menu*, then select *Clear All Expenses*. 
+As the dialog warning you reads, this will delete all the entries you have done. Perhaps it is a good idea to backup the database before proceeding. 
+
+You are your own worst enemy, so click OK on the dialog below if you think you can stop bullets with your teeth.
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/V3UGRr471oOJ0zH3ENHyLg"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SSmR2VqwphI/AAAAAAAAAFg/qGfR51b8ZYI/s400/DeleteEntries.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Death Screen</td></tr></table>
+
+= Credits =
+ * Avelino
+ * My wife for letting me be so close to the PC outside the office
+ * GWB and the IMF for giving me the inspiration for this app.
+ * Nice people who shares their graphic design on commons.wikimedia.com
+ * Nice people from Google who decided to make an exciting open mobile client development platform (breath now).
+ 
