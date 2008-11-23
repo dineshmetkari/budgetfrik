@@ -66,17 +66,76 @@ adb install -r <path to the download file>BudgetFrik.apk
 
 For more complicated stuff (multiple emulators or mobile phone), see the <a href="http://code.google.com/android/reference/adb.html#move"> adb documentation</a>
 
+== Staring The Application ==
+
+Just click the icon that reads "BudgetFrik" and you should be on your way.
+
+=== For The First Time ===
+
+You are greeted by a fiendly (sic) dialog like this:
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/fZQ5PVDsu4yT-6og3ZqtQw"><img src="http://lh6.ggpht.com/_kwr3zmbEX4M/SSmSD6dla-I/AAAAAAAAAFw/THohXuOOksE/s288/InitialScreen.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Welcome Screen</td></tr></table>
+
+Don't worry your are not pwned. The application would connect to the European Central Bank to download the latest currency exchange rates.  It comes preloaded with some outdated currencies. This is the URL in case you are interested: http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
+
+If you click *Cancel* you can do that later. Don't worry this nagdialog (nagialog) only pops the first time.
+
 = Entering Expenses =
 
-== Changing Currency ==
+Welcome to the BudgetFrik experience.  Add a shortcut on your phone (I have no idea how since I don't own one), and taking control of your finances should be seconds away!
+
+Your initial screen looks like this:
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/Anbb4tMYEcQvx55vcO6rRg"><img src="http://lh6.ggpht.com/_kwr3zmbEX4M/SSmSEI60zhI/AAAAAAAAAF4/Rd4JYja-nsk/s400/MainMenu.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Initial Screen</td></tr></table>
+
+Each nice little icon (see the licenses for credits) corresponds to a category of expenses. BudgetFrik comes preloaded with many common (At least in my little world) everyday expenses, and each icon represents (poorly) each one. With the phone's arrows (or emulator's) select them and see the description on top. They are sorted, well, chaotically. They will sort themselves following the _last used first_ principle.
+
+Here they are:
+    *Hobbies and Art
+    *Bills and Other Expenditures
+    *Coffee, Tea and Snacks
+    *Games, Lotto, Gambling
+    *Newspapers, Books and Magazines
+    *DIY and Tools
+    *TV, Movies and Entertainment
+    *Food and Groceries
+    *Restaurants, Delivery and Take Aways
+    *Clothing and Fashion
+    *Electronics and Gadgets
+    *Mobile Top-Ups, Downloads, Ringtones, etc.
+    *Charity and Gifts
+    *Public Transport and Taxis
+    *Car and Fuel
+    *Air Travel
+    *Rent and Household
+    *Gym, Sports and Fitness
+    *Accommodation
+    *Office
+
+To enter an expense in a particular, just click an icon. Then a dialog like this pops:
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/sOD--ZLs5OhB2ZoZYKrJYw"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SSmSDjxfpKI/AAAAAAAAAFo/D3xIgP8osSc/s400/ExpenseEntry.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Entering Expense</td></tr></table>
+
+Don't worry, it is made so you only enter as little info as possible. 
+First, a list of subcategories is available, by default you don't have to select any and right now it makes no difference but it will in the future. The subcategories are arranged following the _last used first_ principle and then alphabetically. Finally some order.
+Then, the currency is selected by default (you can change this), then you enter the amount. 
+To enter the amount you can just click the calculator-like buttons or use the keyboard. One day I will add the choice to change the layout to phone-like if you feel more comfortable. Optionally, you can enter some text. Click OK and you are done.  To erase something just click the *c* button. I added a double zero for those big expenders. Click cancel if you changed your mind. 
 
 = Viewing/Editing Expenses =
 
+Maybe in the next release
+
 = Viewing Reports =
+
+Currently there is only one report.
 
 == Date Report ==
 
+
+
 == Category Report ==
+
+Maybe in the next release
 
 == Changing Report Currency ==
 
