@@ -3,9 +3,68 @@
 
 = Introduction =
 
-Add your content here.
 
 = Getting Started =
+
+== Installation == 
+
+Since I haven't ponied up with the 25 quid, the app is not in the Google Android Store. Maybe for the 1.0 and then I'll charge a dime a download until I get the investment back.
+
+Meanwhile this is intended for developers only, so you'll have to download the <a href="http://code.google.com/android/download.html">Android SDK Download</a> and the latest <a href="http://code.google.com/p/budgetfrik/downloads/detail?name=BudgetFrik.apk"> BudgetFrik APK</a> with the application itself and use the tools to upload to your phone/emulator.
+
+*Simple one-liner*
+{{{
+adb install <path to the download file>BudgetFrik.apk
+}}}
+
+For more complicated stuff (multiple emulators or mobile phone), see the <a href="http://code.google.com/android/reference/adb.html#move"> adb documentation</a>
+
+Anyway, if you managed to get the application on board, your Android menu should look like the screen-shot below:
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/jAZDN9Rr0vXQHrrug6Vl0g"><img src="http://lh6.ggpht.com/_kwr3zmbEX4M/SSmR1UirmnI/AAAAAAAAAFA/tMfj1QUQRJQ/s144/AndroidMenu.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Main Menu</td></tr></table>
+
+
+*Congrats! You just installed BudgetFrik.*
+
+== Backup Data ==
+
+
+To backup your data download the following files using the debugger to your PC/Mac:
+{{{
+
+adb pull /data/data/org.avelino.mobile.android.budgetfrik/databases/budgetfrik_1_0.db budgetfrik_1_0.db
+
+adb pull /data/data/org.avelino.mobile.android.budgetfrik/shared_prefs/org.avelino.mobile.android.budgetfrik_preferences.xml budgetfrik_preferences.xml
+
+}}}
+
+To restore your data upload the following files using the debugger from your PC/Mac:
+
+{{{
+
+adb push <path_to_file_your>budgetfrik_1_0.db /data/data/org.avelino.mobile.android.budgetfrik/databases/budgetfrik_1_0.db 
+
+adb push <path_to_file_your>budgetfrik_preferences.xml /data/data/org.avelino.mobile.android.budgetfrik/shared_prefs/org.avelino.mobile.android.budgetfrik_preferences.xml
+
+}}}
+
+The gigantic directory structure is courtesy of Google, Java and myself.
+
+== Remove Application ==
+
+To remove ... er why do you ever wanna do that? Anyway here's how:
+{{{
+adb uninstall org.avelino.mobile.android.budgetfrik
+}}}
+
+== Re installation and Upgrade ==
+
+*Simple one-liner*
+{{{
+adb install -r <path to the download file>BudgetFrik.apk
+}}}
+
+For more complicated stuff (multiple emulators or mobile phone), see the <a href="http://code.google.com/android/reference/adb.html#move"> adb documentation</a>
 
 = Entering Expenses =
 
