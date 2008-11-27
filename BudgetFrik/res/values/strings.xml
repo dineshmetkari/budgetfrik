@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="arts">Hobbies and Art</string>
-    <string name="bills">Bills and Other Spenditures</string>
+    <string name="bills">Bills and Other Expenditures</string>
     <string name="coffee">Coffee, Tea and Snacks</string>
     <string name="games">Games, Lotto, Gambling</string>
     <string name="news">Newspapers, Books and Magazines</string>
