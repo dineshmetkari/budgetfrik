@@ -3,8 +3,6 @@ package org.avelino.mobile.android.budgetfrik;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Stack;
-
-import android.util.Log;
 /**
  * License http://creativecommons.org/licenses/by-nc-sa/2.5/se/deed.en_US
  * See assets/license.html
@@ -16,7 +14,8 @@ public class CurrencyTO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 3153865913728848761L;
-	private static final String TAG = "CurrencyDAO";
+	@SuppressWarnings("unused")
+	private static final String TAG = "CurrencyTO";
 	private String symbol;
 	private int id;
 	private int base;
@@ -78,22 +77,22 @@ public class CurrencyTO implements Serializable{
 		final CurrencyTO tmpCurr = new CurrencyTO("",0,0.0f,0,"");
 		int rounds = 0;
 		while(rounds < exchLst.size() +1){
-			Log.v(TAG, "Converting $"+cost+" from " + sourceCurr.getId()  + "/" + sourceCurr.getBase() + " to " + targetCurr.getId()  + "/" + targetCurr.getBase()) ;
+//			Log.v(TAG, "Converting $"+cost+" from " + sourceCurr.getId()  + "/" + sourceCurr.getBase() + " to " + targetCurr.getId()  + "/" + targetCurr.getBase()) ;
 			//Same currency ... do nothing, money is ok
 			if (sourceCurr.equals(targetCurr)){
-				Log.v(TAG, "Same currency: " + cost);
+//				Log.v(TAG, "Same currency: " + cost);
 				break;
 			}
 			//Target is the base, then convert to base
 			if (sourceCurr.getBase() == targetCurr.getId()){
 				cost /= sourceCurr.getExchange();
-				Log.v(TAG, "Target is base: " + cost);
+//				Log.v(TAG, "Target is base: " + cost);
 				break;
 			}
 			//Source is the base, then convert from base
 			if (sourceCurr.getId() == targetCurr.getBase()){
 				cost *= targetCurr.getExchange();
-				Log.v(TAG, "Source is base: " + cost);
+//				Log.v(TAG, "Source is base: " + cost);
 				break;
 			} 
 			// else conver to base and see if we have more luck next round.
@@ -103,7 +102,7 @@ public class CurrencyTO implements Serializable{
 			}
 			//Conver to the base
 			cost /= sourceCurr.getExchange();
-			Log.v(TAG, "Convert to base and retry: " + cost);
+//			Log.v(TAG, "Convert to base and retry: " + cost);
 			//Change the source
 			tmpCurr.setId(sourceCurr.getBase());
 			sourceCurr = exchLst.get(exchLst.indexOf(tmpCurr));

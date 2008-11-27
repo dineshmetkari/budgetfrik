@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.avelino.mobile.android.budgetfrik.CategoryDBHelper.Categories;
+import org.avelino.mobile.android.budgetfrik.DBHelper.Categories;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,16 +20,12 @@ import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -45,11 +41,7 @@ import android.widget.ViewFlipper;
  */
 public class BudgetFrikActivity extends Activity {
 	private static final EmptyClickListener EMPTY_CLICK_LISTENER = new EmptyClickListener();
-	private static final int[] CALC_BTNS = { R.id.CalcButton0,
-		R.id.CalcButton00, R.id.CalcButton01, R.id.CalcButton02,
-		R.id.CalcButton03, R.id.CalcButton04, R.id.CalcButton05,
-		R.id.CalcButton06, R.id.CalcButton07, R.id.CalcButton08,
-		R.id.CalcButton09, R.id.CalcButtonDot };
+	
 	private static final int CHANGE_CURRENCY_DIALOG = 4;	
 	
 	private static final int FILENAME_DIALOG = 2;
@@ -72,6 +64,7 @@ public class BudgetFrikActivity extends Activity {
 	private GridView mGrid;
 	private Report report;
 	private final ReportMenuListener reportMenuListener = new ReportMenuListener();
+	private CostDetailsListener costDetailsListener;
 
 
 	private static final class EmptyClickListener implements
@@ -149,15 +142,6 @@ public class BudgetFrikActivity extends Activity {
 
 		}
 	}
-	private static final class CalcButtonListener implements OnClickListener {
-
-		public void onClick(View v) {
-			final Button btn = (Button) v;
-			EditText value = (EditText) v.getRootView().findViewById(
-					R.id.Edit_Value);
-			value.append(btn.getText());
-		}
-	}
 	private final class ReportMenuListener implements OnMenuItemClickListener {
 
 		public boolean onMenuItemClick(MenuItem item) {
@@ -222,7 +206,8 @@ public class BudgetFrikActivity extends Activity {
 		final List<CurrencyTO> currencies = adapter.getCurrencies();
 		switch (id) {
 		case ENTRY_DETAILS_DIALOG:
-			dialog = getDataEntryDialog(currencies);
+				costDetailsListener = new CostDetailsListener(adapter);
+				dialog = DialogHelper.getDataEntryDialog(currencies, costDetailsListener, this, new CalcButtonListener(costDetailsListener));
 			break;
 		case FILENAME_DIALOG:
 			dialog = getFilenameDialog();
@@ -277,39 +262,6 @@ public class BudgetFrikActivity extends Activity {
 		return dialog;
 	}
 
-	private AlertDialog getDataEntryDialog(final List<CurrencyTO> currencies) {
-		AlertDialog dialog;
-		final View textEntryView = layoutFactory.inflate(R.layout.enterdialog, null);
-		final CostDetailsListener costDetailsListener = new CostDetailsListener(
-				adapter);
-		dialog = new AlertDialog.Builder(this)
-				.setCustomTitle(layoutFactory.inflate(R.layout.dialogtitle, null))
-				.setPositiveButton(android.R.string.ok, costDetailsListener)
-				.setNegativeButton(android.R.string.cancel,EMPTY_CLICK_LISTENER)
-				.setView(textEntryView).create();
-		costDetailsListener.setAlertDialog(dialog);
-		// Button 00,0-9,. just append the face value
-		final CalcButtonListener calcButtonListener = new CalcButtonListener();
-		for (int btnId : CALC_BTNS) {
-			((Button) textEntryView.findViewById(btnId))
-					.setOnClickListener(calcButtonListener);
-		}
-		// Button c, sends a delete keypress event
-		((Button) textEntryView.findViewById(R.id.CalcButtonC))
-				.setOnClickListener(new OnClickListener() {
-					public void onClick(View v) {
-						v.getRootView().findViewById(R.id.Edit_Value)
-								.dispatchKeyEvent(
-										new KeyEvent(KeyEvent.ACTION_DOWN,
-												KeyEvent.KEYCODE_DEL));
-						v.getRootView().findViewById(R.id.Edit_Value)
-								.dispatchKeyEvent(
-										new KeyEvent(KeyEvent.ACTION_UP,
-												KeyEvent.KEYCODE_DEL));
-					}
-				});
-		return dialog;
-	}
 
 	private AlertDialog getFilenameDialog() {
 		final EditText textEntryView = new EditText(this);
@@ -347,6 +299,16 @@ public class BudgetFrikActivity extends Activity {
 				intent.setClass(BudgetFrikActivity.this, FrikPreferencesActivity.class);
 				startActivity(intent);
 				adapter.clearCache();
+				return false;
+			}});
+		item = menu.findItem(R.id.calendar_menuitem);
+		item.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+
+			public boolean onMenuItemClick(MenuItem item) {
+				Intent intent = new Intent();
+				intent.putExtra(CalendarActivity.CURRENCIES, (Serializable)adapter.getCurrencies());
+				intent.setClass(BudgetFrikActivity.this, CalendarActivity.class);
+				startActivity(intent);
 				return false;
 			}});
 	}
@@ -434,7 +396,6 @@ public class BudgetFrikActivity extends Activity {
 									Categories.ICON).toString()));
 			((EditText) dialog.findViewById(R.id.Edit_Notes)).setText("");
 			((EditText) dialog.findViewById(R.id.Edit_Value)).setText("");
-			
 			final ArrayAdapter<CurrencyTO> currAdapter = new ArrayAdapter<CurrencyTO>(
 					this, android.R.layout.simple_spinner_item, currencies);
 			final CurrencyTO defCurrency = currencies.get(
@@ -451,7 +412,7 @@ public class BudgetFrikActivity extends Activity {
 			Spinner currLst =  (Spinner)dialog.findViewById(R.id.LLayout2).findViewById(R.id.ChooseCurrency);
 			currLst.setAdapter(currAdapter);
 			currAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			
+			costDetailsListener.onPrepare();
 			break;
 		case FILENAME_DIALOG:
 			((EditText) dialog.findViewById(R.id.Edit_Value))

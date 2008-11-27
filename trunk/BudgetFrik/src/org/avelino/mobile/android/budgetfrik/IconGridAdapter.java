@@ -11,10 +11,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.avelino.mobile.android.budgetfrik.CategoryDBHelper.Categories;
-import org.avelino.mobile.android.budgetfrik.CategoryDBHelper.CostQuery;
-import org.avelino.mobile.android.budgetfrik.CategoryDBHelper.Currencies;
-import org.avelino.mobile.android.budgetfrik.CategoryDBHelper.ReportEntry;
+import org.avelino.mobile.android.budgetfrik.DBHelper.Categories;
+import org.avelino.mobile.android.budgetfrik.DBHelper.CostQuery;
+import org.avelino.mobile.android.budgetfrik.DBHelper.Currencies;
+import org.avelino.mobile.android.budgetfrik.DBHelper.ReportEntry;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -36,7 +36,7 @@ import android.widget.AbsListView.LayoutParams;
  * @author Avelino Benavides
  *
  */
-public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnFocusChangeListener {
+public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnFocusChangeListener, IEntryEditor {
     
     
     private static final LayoutParams IMG_BTN_LAYOUT_PARAMS = new GridView.LayoutParams(80, 80);
@@ -45,7 +45,7 @@ public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnF
 	 * 
 	 */
 	private final Activity gridActivity;
-	private CategoryDBHelper dbHelper;
+	private DBHelper dbHelper;
 	private SQLiteDatabase db;
 	private Cursor cursor;
 	private View activeObj;
@@ -59,7 +59,7 @@ public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnF
 	}
 
 	public void open(){
-		dbHelper = new CategoryDBHelper(gridActivity);
+		dbHelper = new DBHelper(gridActivity);
 		db = dbHelper.getReadableDatabase();
 	}
 
@@ -207,14 +207,17 @@ public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnF
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.avelino.mobile.android.budgetfrik.IEntryEditor#insertEntry(org.avelino.mobile.android.budgetfrik.EntryTO)
+	 */
 	public void insertEntry(EntryTO entryDAO) {
-		dbHelper.insertEntry(entryDAO.getCost(),entryDAO.getNotes(),entryDAO.getCat().getId(),entryDAO.getCurr().getId());
-		dbHelper.updateCategoryHit(entryDAO.getCat().getId());
-		if (entryDAO.getCat().getParentId() >=0 ){ //-1 means no parent
-			dbHelper.updateCategoryHit(entryDAO.getCat().getParentId());
-		}
+		EntryEditorImpl.insertEntry(entryDAO, dbHelper);
 	}
 
+	
+	public void updateEntry(EntryTO entry){
+		EntryEditorImpl.updateEntry(entry, dbHelper);
+	}
 	
 	public Report getDefaultReport(int defaultCurrency) {
 		CurrencyTO defCurr = null;
@@ -235,7 +238,7 @@ public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnF
 
 	public Cursor queryCostEntryDate(CostQuery costQuery, String[] date) {
 		
-		return dbHelper.queryCostEntryDate(db,costQuery, date);
+		return dbHelper.queryCostEntryDate(db,costQuery, date, true);
 	}
 
 	public ReportEntryDAO sumarizeAndConvert(Cursor cursor,

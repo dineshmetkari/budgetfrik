@@ -7,11 +7,18 @@ package org.avelino.mobile.android.budgetfrik;
  */
 public class CategoryTO {
 	private String title;
+	private int iconType;
+	private String icon;
 	public CategoryTO(String title, int id, int parentId) {
-		super();
 		this.title = title;
 		this.id = id;
 		this.setParentId(parentId);
+	}
+	public CategoryTO(String title, int id, int parentId, String icon,
+			int iconType) {
+		this(title,id,parentId);
+		this.icon = icon;
+		this.iconType = iconType;
 	}
 	private int id;
 	private int parentId;
@@ -35,5 +42,17 @@ public class CategoryTO {
 	}
 	public int getParentId() {
 		return parentId;
+	}
+	public int getIconType() {
+		return iconType;
+	}
+	public void setIconType(int iconType) {
+		this.iconType = iconType;
+	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 }

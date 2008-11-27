@@ -1,6 +1,7 @@
 package org.avelino.mobile.android.budgetfrik;
 
-import java.text.NumberFormat;
+import static org.avelino.mobile.android.budgetfrik.EntryTO.CURRENCY_FORMAT;
+
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.avelino.mobile.android.budgetfrik.CategoryDBHelper.CostQuery;
+import org.avelino.mobile.android.budgetfrik.DBHelper.CostQuery;
 
 import android.util.Log;
 /**
@@ -24,7 +25,6 @@ public class DefaultReport implements Report {
 	private final Map<Integer,String> report;
 	private boolean isReportCalculated = false;
 	private boolean isCurrencyChanged = false;
-	private static final NumberFormat CURR_FMT = NumberFormat.getCurrencyInstance();
 	private static final String TAG = "DefaultReport";
 	
 	
@@ -113,38 +113,38 @@ public class DefaultReport implements Report {
 					CostQuery.SIMPLE_ALL, 
 					new String []{}), getCurrency(), curr);
 			progress.setProgress(90);
-			report.put(R.id.this_d_exp_val,  CURR_FMT.format(today.getCost()));
-			report.put(R.id.this_w_exp_val,  CURR_FMT.format(thisWk.getCost()));
-			report.put(R.id.this_m_exp_val,  CURR_FMT.format(thisMh.getCost()));
-			report.put(R.id.this_y_exp_val,  CURR_FMT.format(thisYr.getCost()));
-			report.put(R.id.last_d_exp_val,  CURR_FMT.format(yester.getCost()));
-			report.put(R.id.last_w_exp_val,  CURR_FMT.format(lastWk.getCost()));
-			report.put(R.id.last_m_exp_val,  CURR_FMT.format(lastMh.getCost()));
-			report.put(R.id.last_y_exp_val,  CURR_FMT.format(lastYr.getCost()));
-			report.put(R.id.total_exp_val,  CURR_FMT.format(total.getCost()));
+			report.put(R.id.this_d_exp_val,  CURRENCY_FORMAT.format(today.getCost()));
+			report.put(R.id.this_w_exp_val,  CURRENCY_FORMAT.format(thisWk.getCost()));
+			report.put(R.id.this_m_exp_val,  CURRENCY_FORMAT.format(thisMh.getCost()));
+			report.put(R.id.this_y_exp_val,  CURRENCY_FORMAT.format(thisYr.getCost()));
+			report.put(R.id.last_d_exp_val,  CURRENCY_FORMAT.format(yester.getCost()));
+			report.put(R.id.last_w_exp_val,  CURRENCY_FORMAT.format(lastWk.getCost()));
+			report.put(R.id.last_m_exp_val,  CURRENCY_FORMAT.format(lastMh.getCost()));
+			report.put(R.id.last_y_exp_val,  CURRENCY_FORMAT.format(lastYr.getCost()));
+			report.put(R.id.total_exp_val,  CURRENCY_FORMAT.format(total.getCost()));
 			report.put(R.id.currency_val,getCurrency().getMnemonic());
 			isReportCalculated = true;
 		} else if (isCurrencyChanged){
 			progress.setProgress(10);
 			List<CurrencyTO> curr = adapter.getCurrencies();
 			try {
-				report.put(R.id.this_d_exp_val,  CURR_FMT.format(CurrencyTO.convertToCurrency(CURR_FMT.parse(report.get(R.id.this_d_exp_val)).floatValue(), oldCurrency, currency, curr)));
+				report.put(R.id.this_d_exp_val,  CURRENCY_FORMAT.format(CurrencyTO.convertToCurrency(CURRENCY_FORMAT.parse(report.get(R.id.this_d_exp_val)).floatValue(), oldCurrency, currency, curr)));
 				progress.setProgress(20);
-				report.put(R.id.this_w_exp_val,  CURR_FMT.format(CurrencyTO.convertToCurrency(CURR_FMT.parse(report.get(R.id.this_w_exp_val)).floatValue(), oldCurrency, currency, curr)));
+				report.put(R.id.this_w_exp_val,  CURRENCY_FORMAT.format(CurrencyTO.convertToCurrency(CURRENCY_FORMAT.parse(report.get(R.id.this_w_exp_val)).floatValue(), oldCurrency, currency, curr)));
 				progress.setProgress(30);
-				report.put(R.id.this_m_exp_val,  CURR_FMT.format(CurrencyTO.convertToCurrency(CURR_FMT.parse(report.get(R.id.this_m_exp_val)).floatValue(), oldCurrency, currency, curr)));
+				report.put(R.id.this_m_exp_val,  CURRENCY_FORMAT.format(CurrencyTO.convertToCurrency(CURRENCY_FORMAT.parse(report.get(R.id.this_m_exp_val)).floatValue(), oldCurrency, currency, curr)));
 				progress.setProgress(40);
-				report.put(R.id.this_y_exp_val,  CURR_FMT.format(CurrencyTO.convertToCurrency(CURR_FMT.parse(report.get(R.id.this_y_exp_val)).floatValue(), oldCurrency, currency, curr)));
+				report.put(R.id.this_y_exp_val,  CURRENCY_FORMAT.format(CurrencyTO.convertToCurrency(CURRENCY_FORMAT.parse(report.get(R.id.this_y_exp_val)).floatValue(), oldCurrency, currency, curr)));
 				progress.setProgress(50);
-				report.put(R.id.last_d_exp_val,  CURR_FMT.format(CurrencyTO.convertToCurrency(CURR_FMT.parse(report.get(R.id.last_d_exp_val)).floatValue(), oldCurrency, currency, curr)));
+				report.put(R.id.last_d_exp_val,  CURRENCY_FORMAT.format(CurrencyTO.convertToCurrency(CURRENCY_FORMAT.parse(report.get(R.id.last_d_exp_val)).floatValue(), oldCurrency, currency, curr)));
 				progress.setProgress(60);
-				report.put(R.id.last_w_exp_val,  CURR_FMT.format(CurrencyTO.convertToCurrency(CURR_FMT.parse(report.get(R.id.last_w_exp_val)).floatValue(), oldCurrency, currency, curr)));
+				report.put(R.id.last_w_exp_val,  CURRENCY_FORMAT.format(CurrencyTO.convertToCurrency(CURRENCY_FORMAT.parse(report.get(R.id.last_w_exp_val)).floatValue(), oldCurrency, currency, curr)));
 				progress.setProgress(70);
-				report.put(R.id.last_m_exp_val,  CURR_FMT.format(CurrencyTO.convertToCurrency(CURR_FMT.parse(report.get(R.id.last_m_exp_val)).floatValue(), oldCurrency, currency, curr)));
+				report.put(R.id.last_m_exp_val,  CURRENCY_FORMAT.format(CurrencyTO.convertToCurrency(CURRENCY_FORMAT.parse(report.get(R.id.last_m_exp_val)).floatValue(), oldCurrency, currency, curr)));
 				progress.setProgress(80);
-				report.put(R.id.last_y_exp_val,  CURR_FMT.format(CurrencyTO.convertToCurrency(CURR_FMT.parse(report.get(R.id.last_y_exp_val)).floatValue(), oldCurrency, currency, curr)));
+				report.put(R.id.last_y_exp_val,  CURRENCY_FORMAT.format(CurrencyTO.convertToCurrency(CURRENCY_FORMAT.parse(report.get(R.id.last_y_exp_val)).floatValue(), oldCurrency, currency, curr)));
 				progress.setProgress(90);
-				report.put(R.id.total_exp_val,  CURR_FMT.format(CurrencyTO.convertToCurrency(CURR_FMT.parse(report.get(R.id.total_exp_val)).floatValue(), oldCurrency, currency, curr)));
+				report.put(R.id.total_exp_val,  CURRENCY_FORMAT.format(CurrencyTO.convertToCurrency(CURRENCY_FORMAT.parse(report.get(R.id.total_exp_val)).floatValue(), oldCurrency, currency, curr)));
 			} catch (ParseException e) {
 				Log.w(TAG,"Error while converting currencies from text to float",e);
 			}
