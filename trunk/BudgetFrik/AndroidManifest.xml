@@ -14,6 +14,11 @@
 <category android:name="android.intent.category.PREFERENCE"></category>
 </intent-filter>
 </activity>
+<activity android:launchMode="standard" android:name="CalendarActivity"><intent-filter><action android:name="android.intent.action.VIEW"></action>
+<action android:name="android.intent.action.EDIT"></action>
+<category android:name="android.intent.category.BROWSABLE"></category>
+</intent-filter>
+</activity>
 </application>
 <uses-permission android:name="android.permission.INTERNET" />
 
