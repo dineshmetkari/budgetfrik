@@ -3,10 +3,11 @@ package org.avelino.mobile.android.budgetfrik;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.avelino.mobile.android.budgetfrik.CategoryDBHelper.Currencies;
+import org.avelino.mobile.android.budgetfrik.DBHelper.Currencies;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
@@ -20,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.widget.Toast;
 /**
  * License http://creativecommons.org/licenses/by-nc-sa/2.5/se/deed.en_US
  * See assets/license.html
@@ -51,8 +53,7 @@ public class FrikPreferencesActivity extends PreferenceActivity {
 		csvPref.setDefaultValue(PreferenceManager.getDefaultCSVSeparator());
 		
 		if (getIntent().getSerializableExtra(AUTOUPDATE)!= null){
-			final AlertDialog updating = new AlertDialog.Builder(FrikPreferencesActivity.this)
-			.setMessage("Updating").create();
+			Toast.makeText(this, "Updating", Toast.LENGTH_LONG).show();
 			new OnCurrencyUpdateListener(new ProgressListenerHandler(new Handler()){
 
 				@Override
@@ -60,14 +61,12 @@ public class FrikPreferencesActivity extends PreferenceActivity {
 					
 					super.setProgress(p);
 					if (p >=100){
-						updating.dismiss();
 						show(new AlertDialog.Builder(FrikPreferencesActivity.this)
 						.setMessage("Press the back button to go the main screen"));
 					}
 				}
 				
 			}).onMenuItemClick(null);
-			updating.show();
 			
 		}
 	}
@@ -117,7 +116,7 @@ public class FrikPreferencesActivity extends PreferenceActivity {
 
 				@Override
 				public void run() {
-					final CategoryDBHelper dbhelper = new CategoryDBHelper(
+					final DBHelper dbhelper = new DBHelper(
 							FrikPreferencesActivity.this);
 					updater = new RemoteCurrencyUpdater(dbhelper);
 					try {
@@ -128,10 +127,10 @@ public class FrikPreferencesActivity extends PreferenceActivity {
 						if (updater
 								.updateCurrencies(progressHandler)) {
 							Cursor c = dbhelper.getAllCurrencies(dbhelper.getReadableDatabase());
-							List<CurrencyTO> l = new ArrayList<CurrencyTO>();
+							List<CurrencyTO> currList = new ArrayList<CurrencyTO>();
 							c.moveToFirst();
 							while (!c.isAfterLast()) {
-								l.add(new CurrencyTO(c
+								currList.add(new CurrencyTO(c
 										.getString(Currencies.SYMBOL.dbIndex()), 
 										c.getInt(Currencies._ID.dbIndex()),
 										c.getFloat(Currencies.EXCHANGE.dbIndex()), 
@@ -140,11 +139,8 @@ public class FrikPreferencesActivity extends PreferenceActivity {
 								c.moveToNext();
 							}
 							c.close();
-							setCurrencyCombo(l);
-							progressHandler.show(
-									new AlertDialog.Builder(
-										FrikPreferencesActivity.this)
-											.setMessage("Currencies Updated"));
+							setCurrencyCombo(currList);
+							progressHandler.showToast("Currencies Updated", FrikPreferencesActivity.this, Toast.LENGTH_SHORT);
 						} else {
 							progressHandler.show(
 									new AlertDialog.Builder(
@@ -172,6 +168,16 @@ public class FrikPreferencesActivity extends PreferenceActivity {
 		private final Handler handler; 
 		public ProgressListenerHandler(Handler handler) {
 			this.handler = handler;
+		}
+
+		public void showToast(final String toast, final Context context, final int duration) {
+			handler.post(new Runnable(){
+
+				public void run() {
+					Toast.makeText(context, toast, duration).show();
+				}
+				
+			});
 		}
 
 		public void setProgress(int p) {
@@ -251,7 +257,7 @@ public class FrikPreferencesActivity extends PreferenceActivity {
 						android.R.string.ok, new OnClickListener() {
 
 							public void onClick(DialogInterface dlg, int which) {
-								new CategoryDBHelper(
+								new DBHelper(
 										FrikPreferencesActivity.this)
 										.clearEntries();
 								dlg.dismiss();

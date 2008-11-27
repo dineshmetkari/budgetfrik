@@ -12,6 +12,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -28,9 +29,9 @@ import android.util.Log;
  *
  * This class helps open, create, and upgrade the database file.
  */
-public class CategoryDBHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
 
-	 	private static final String TAG = "CategoryDBHelper";
+	 	private static final String TAG = "DBHelper";
 
 	    private static final String DATABASE_NAME = "budgetfrik_1_0.db";
 	    private static final int DATABASE_VERSION = 2;
@@ -47,7 +48,7 @@ public class CategoryDBHelper extends SQLiteOpenHelper {
 	    
 	    private final Context ctxt;
 	    
-    CategoryDBHelper(Context context) {
+    DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         ctxt = context;
         //Log.d(TAG, "Helper instantiated");
@@ -487,7 +488,8 @@ public class CategoryDBHelper extends SQLiteOpenHelper {
 		SIMPLE_WEEK ("strftime(\"%Y-%W\",date_created) = ? ", new SimpleDateFormat("yyyy-ww"),"currency_id"),
 		SIMPLE_MONTH ("strftime(\"%Y-%m\",date_created) = ? ", new SimpleDateFormat("yyyy-MM"),"currency_id"),
 		SIMPLE_YEAR ("strftime(\"%Y\",date_created) = ? ", new SimpleDateFormat("yyyy"),"currency_id"),
-		SIMPLE_ALL(null,null,"currency_id");
+		SIMPLE_ALL(null,null,"currency_id"),
+		BETWEEN_DATES ("date(?) <= date(date_created) or date(date_created) >= date(?)", new SimpleDateFormat("yyyy-MM-dd"),null);
 		
 		private final String query;
 		private final String group;
@@ -511,22 +513,47 @@ public class CategoryDBHelper extends SQLiteOpenHelper {
 	}
 	
 	
-	public Cursor queryCostEntryDate(SQLiteDatabase db, CostQuery costQuery, String[] dates) {
-		String query = SQLiteQueryBuilder.buildQueryString(false, "cost_entry, currency on currency._ID = currency_id", 
-				new String[]{"sum(cost) as cost" , "date_created", "currency_id", "symbol", "mnemonic", "exchange", "base_id"},
-				costQuery.getQuery(), costQuery.getGrouping(), null, "date_created desc", null);
+	public Cursor queryCostEntryDate(SQLiteDatabase db, CostQuery costQuery, String[] dates, boolean lumpsum) {
+		String query = SQLiteQueryBuilder.buildQueryString(false, 
+				ENTRY_TABLE_NAME +", " + 
+				CURRENCY_TABLE_NAME + " on "+CURRENCY_TABLE_NAME+"." + Currencies._ID.columnName()+" = " + Entries.CURRENCY.columnName() + ", " +
+				CATEGORY_TABLE_NAME + " on "+CATEGORY_TABLE_NAME+"." + Categories._ID.columnName()+" = " + Entries.CATEGORY.columnName(), 
+				new String[]{
+								ENTRY_TABLE_NAME+"."+Entries._ID + " as " +ReportEntry.ENTRY_ID,
+								(lumpsum ? "sum("+ReportEntry.COST+") as "+ReportEntry.COST : ReportEntry.COST.columnName()),
+								ReportEntry.DATE.columnName(), 
+								ReportEntry.CURRENCY_ID.columnName(), 
+								ReportEntry.SYMBOL.columnName(), 
+								ReportEntry.MNEMONIC.columnName(), 
+								ReportEntry.EXCHANGE.columnName(), 
+								ReportEntry.BASE.columnName(),
+								ReportEntry.TITLE.columnName(),
+								ReportEntry.CATEGORY_ID.columnName(),
+								ReportEntry.PARENT_CATEGORY_ID.columnName(),
+								ReportEntry.ICON.columnName(),
+								ReportEntry.ICON_TYPE.columnName(),
+								ReportEntry.NOTES.columnName()
+								},
+				costQuery.getQuery(), costQuery.getGrouping(), null, Entries.DATE + " desc", null);
 		Log.i(TAG + ".queryCostEntryDate:query", query);
 		Log.i(TAG + ".queryCostEntryDate:args", Arrays.asList(dates).toString());
 		return db.rawQuery(query, dates);
 	}
 	public enum ReportEntry {
-        COST("cost",0),
-    	DATE("date_created",1),
-        CURRENCY_ID("currency_id",2),
-        SYMBOL("symbol",3),
-        MNEMONIC("mnemonic",4),
-        EXCHANGE("exchange",5), 
-        BASE("base_id",6);
+		ENTRY_ID(		"entry_id",		0),
+        COST(			"cost",			1),
+    	DATE(			"date_created",	2),
+        CURRENCY_ID(	"currency_id",	3),
+        SYMBOL(			"symbol",		4),
+        MNEMONIC(		"mnemonic",		5),
+        EXCHANGE(		"exchange",		6), 
+        BASE(			"base_id",		7),
+        TITLE(			"title",		8),
+        CATEGORY_ID(	"category_id",	9),
+    PARENT_CATEGORY_ID(	"parent_id",	10),
+        ICON(			"icon",			11),
+        ICON_TYPE(		"icontype",		12),
+		NOTES(			"notes",		13);
     	
     	private final int index;
     	private final String colname;
@@ -576,6 +603,28 @@ public class CategoryDBHelper extends SQLiteOpenHelper {
 		}
 		
 		
+	}
+
+	public void updateEntry(int id, float cost, String notes, int catid, int currid, String date) {
+		final SQLiteDatabase wdb = getWritableDatabase();
+			wdb.execSQL("UPDATE " + ENTRY_TABLE_NAME + " SET " + Entries.COST + " = " + cost + ", " +
+					Entries.NOTES.columnName() + " = " + DatabaseUtils.sqlEscapeString(notes) + ", " +
+					Entries.CATEGORY.columnName() + " = " + catid + ", " + Entries.CURRENCY.columnName() + " = " + currid + ", " +
+					Entries.DATE.columnName() + " = " + DatabaseUtils.sqlEscapeString(date) + " WHERE " +
+					Entries._ID.columnName() + " = " + id);
+			Log.d(TAG, "Updated Entry:"+id);
+	}
+
+	public Cursor getCategory(int id, SQLiteDatabase db) {
+		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+		qb.setTables(CATEGORY_TABLE_NAME);
+		qb.setProjectionMap(CATEGORY_MAP);
+		qb.appendWhere(" " + Categories._ID.columnName() + " = " + id);
+		return qb.query(db, null, null, null, null, null, Categories.DEFAULT_SUB_CAT_SORT_ORDER);
+	}
+
+	public void deleteEntry(int id, SQLiteDatabase db) {
+		db.execSQL("DELETE FROM "+ ENTRY_TABLE_NAME + " WHERE " + Entries._ID.columnName() + " = " + id);
 	}
 
 }

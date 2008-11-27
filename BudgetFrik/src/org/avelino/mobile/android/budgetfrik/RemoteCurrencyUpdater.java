@@ -11,7 +11,7 @@ import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.avelino.mobile.android.budgetfrik.CategoryDBHelper.Currencies;
+import org.avelino.mobile.android.budgetfrik.DBHelper.Currencies;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -28,11 +28,11 @@ import android.util.Log;
 public class RemoteCurrencyUpdater {
 
 	private static final String TAG = "RemoteCurrencyUpdater";
-	private final CategoryDBHelper dbhelper;
+	private final DBHelper dbhelper;
 	private boolean cancelled;
 	private String reason = "N/A";
 
-	public RemoteCurrencyUpdater(CategoryDBHelper dbhelper){
+	public RemoteCurrencyUpdater(DBHelper dbhelper){
 		this.dbhelper = dbhelper;
 	}
 	
