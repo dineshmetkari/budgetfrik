@@ -1,0 +1,8 @@
+
+FIX Calendar View:
+
+Done * Add Menu to GO TO DATE and default's today.
+ * When changing views from large to small, I dont like it
+Done * Week view, month starts funny and ends funny
+Done * Month view, year starts in march and ends in january next year!
+Done 5 years: +2 -2 * Year view works OK but... is it useful? Maybe 5 years view
