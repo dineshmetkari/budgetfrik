@@ -16,9 +16,7 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:icon="@android:/drawable/ic_menu_gallery" android:id="@+id/back2main_menuitem" android:title="@string/menu_main"/>
-
-    <item android:id="@+id/reports_menuitem"
+        <item android:id="@+id/reports_menuitem"
         android:icon="@android:/drawable/ic_menu_report_image" android:titleCondensed="Currency" android:title="@string/menu_curr"/>
 
     <item android:icon="@android:/drawable/ic_menu_save" android:id="@+id/save_menuitem" android:title="@string/file_dialog_title"/>

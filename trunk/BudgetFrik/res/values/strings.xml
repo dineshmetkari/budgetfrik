@@ -33,15 +33,15 @@
 	<string name="preferences">Preferences</string>
 	<!-- Reports -->
 	<string name="exp_heading" >Expenses Report</string>
-	<string name="this_d_exp" >Today's Expenses:</string>
-	<string name="last_d_exp">Yesterday's Expenses:</string>
-	<string name="this_w_exp">This Week's Expenses:</string>
-	<string name="last_w_exp">Last Week's Expenses:</string>
-	<string name="this_m_exp">This Month's Expenses:</string>
-	<string name="last_m_exp">Last Month's Expenses:</string>
-	<string name="this_y_exp">This Year's Expenses:</string>
-	<string name="last_y_exp">Last Year's Expenses:</string>
-	<string name="total_exp">Total Expenses To Date:</string>
+	<string name="this_d_exp" >Today\'s Expenses:</string>
+	<string name="last_d_exp">Yesterday\'s Expenses:</string>
+	<string name="this_w_exp">This Week\'s Expenses:</string>
+	<string name="last_w_exp">Last Week\'s Expenses:</string>
+	<string name="this_m_exp">This Month\'s Expenses:</string>
+	<string name="last_m_exp">Last Month\'s Expenses:</string>
+	<string name="this_y_exp">This Year\'s Expenses:</string>
+	<string name="last_y_exp">Last Year\'s Expenses:</string>
+	<string name="total_exp">Total Expenses:</string>
 	<string name="currency_txt">Currency:</string>
 	
 </resources>
