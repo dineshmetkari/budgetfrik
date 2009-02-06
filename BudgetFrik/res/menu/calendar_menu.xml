@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_week" android:icon="@android:/drawable/ic_menu_week" android:title="@string/menu_week" />
+    <item android:id="@+id/menu_day" android:icon="@android:/drawable/ic_menu_day" android:title="@string/menu_day" />
+    <item android:id="@+id/menu_month" android:icon="@android:/drawable/ic_menu_month" android:title="@string/menu_month" />
+    <item android:id="@+id/menu_gotodate" android:icon="@android:/drawable/ic_menu_agenda" android:title="@string/menu_gotodate" />
+    <item android:id="@+id/menu_year" android:icon="@android:/drawable/ic_menu_my_calendar" android:title="@string/menu_year" />
+    
+</menu>

@@ -1,0 +1,6 @@
+<resources><string name="menu_week">Week View</string>
+<string name="menu_month">Month View</string>
+<string name="menu_year">Year View</string>
+<string name="menu_day">Day View</string>
+<string name="menu_gotodate">Go to Date</string>
+</resources>
