@@ -19,6 +19,11 @@
 <category android:name="android.intent.category.BROWSABLE"></category>
 </intent-filter>
 </activity>
+<activity android:name="ReportActivity" android:launchMode="standard"><intent-filter><action android:name="android.intent.action.VIEW"></action>
+<category android:name="android.intent.category.BROWSABLE"></category>
+
+</intent-filter>
+</activity>
 </application>
 <uses-permission android:name="android.permission.INTERNET" />
 
