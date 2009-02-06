@@ -1,0 +1,19 @@
+<LinearLayout 
+	android:id="@+id/LinearLayout01" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<Button android:id="@+id/btn_prev" 
+	android:layout_height="wrap_content" 
+	android:drawableLeft="@android:drawable/ic_media_previous" 
+	android:layout_gravity="left|fill_horizontal" 
+	android:layout_width="fill_parent" 
+	android:layout_weight="0.5" android:gravity="right|center" android:text="Previous Week "></Button>
+	<Button android:id="@+id/btn_next" 
+	android:text="Next Week " 
+	android:layout_gravity="right|fill_horizontal" 
+	android:layout_height="wrap_content" 
+	android:layout_width="fill_parent" 
+	android:layout_weight="0.5" 
+	android:drawableRight="@android:drawable/ic_media_next" android:gravity="left|center"></Button>
+</LinearLayout>
