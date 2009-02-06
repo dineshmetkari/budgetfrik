@@ -1,66 +1,60 @@
 package org.avelino.mobile.android.budgetfrik;
 
-import static org.avelino.mobile.android.budgetfrik.EntryTO.SIMPLE_DATE_FORMAT;
 
 import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.avelino.mobile.android.budgetfrik.DBHelper.Categories;
-import org.avelino.mobile.android.budgetfrik.DBHelper.CostQuery;
-import org.avelino.mobile.android.budgetfrik.DBHelper.ReportEntry;
+import org.avelino.mobile.android.budgetfrik.DateHelper.TimeUnits;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ExpandableListActivity;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
-import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 
 public class CalendarActivity extends ExpandableListActivity {
 
-	private static final DateFormat DATE_INSTANCE = DateFormat.getDateInstance(DateFormat.MEDIUM);
+	static final DateFormat DATE_INSTANCE = DateFormat.getDateInstance(DateFormat.MEDIUM);
+	static final DateFormat SHORT_DATE_INSTANCE = DateFormat.getDateInstance(DateFormat.SHORT);
+	static final DateFormat MONTH_YEAR_INSTANCE = new SimpleDateFormat("MMMM yyyy");
+	static final DateFormat YEAR_INSTANCE = new SimpleDateFormat("yyyy");
 	protected static final String CURRENCIES = "org.avelino.mobile.android.budgetfrik.CalendarActivity.currency.list";
 	protected static final int EDIT_EXPENSE_DIALOG = 1;
 	protected static final String TAG = "CalendarActivity";
 	private static final int MOVE_CATEGORY_DIALOG = 2;
 	private static final int CHANGE_DATE_DIALOG = 3;
 	private static final int CONFIRM_DELETE_DIALOG = 4;
+	protected static final int DISPLAY_DATE_DIALOG = 5;
+	
 	
 	private DBHelper helper;
 	private List<CurrencyTO> currencies;
 	private DateCalendarAdapter adapter;
 	private CostDetailsListener costDetailsListener;
-	private Calendar weekstart;
 	private View selectedView;
+	private Button nextBtn;
+	private Button prevBtn;
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v,
 			int groupPosition, int childPosition, long id) {
@@ -74,32 +68,29 @@ public class CalendarActivity extends ExpandableListActivity {
 		super.onCreate(savedInstanceState);
 		helper = new DBHelper(this);
 		currencies = ((List<CurrencyTO>) getIntent().getSerializableExtra(CURRENCIES));
-		weekstart = Calendar.getInstance();
+		Calendar weekstart = Calendar.getInstance();
 		final int maxWeekDays = weekstart.getMaximum(Calendar.DAY_OF_WEEK);
 		weekstart.set(Calendar.DAY_OF_WEEK, maxWeekDays);
-		adapter = new DateCalendarAdapter(weekstart.getTime(), maxWeekDays , helper);
-		final Button nwk = new Button(this);
-		nwk.setText("Next Week>");
-		nwk.setOnClickListener(new OnClickListener(){
+		adapter = new DateCalendarAdapter(this, weekstart.getTime(), maxWeekDays , helper);
+		final LinearLayout header = (LinearLayout) getLayoutInflater().inflate(R.layout.calendarhdr, null);
+		//header.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		nextBtn = (Button) header.findViewById(R.id.btn_next);
+		nextBtn.setOnClickListener(new OnClickListener(){
 
 			public void onClick(View v) {
-				weekstart.add(Calendar.WEEK_OF_YEAR, 1);
-				adapter.moveTo(weekstart.getTime());
+				adapter.moveForward();
 				getExpandableListView().invalidate();
 				setListAdapter(adapter);
 			}});
-		final Button pwk = new Button(this);
-		pwk.setText("<Previous Week");
-		pwk.setOnClickListener(new OnClickListener(){
+		prevBtn = (Button) header.findViewById(R.id.btn_prev);
+		prevBtn.setOnClickListener(new OnClickListener(){
 
 			public void onClick(View v) {
-				weekstart.add(Calendar.WEEK_OF_YEAR, -1);
-				adapter.moveTo(weekstart.getTime());
+				adapter.moveBackward();
 				getExpandableListView().invalidate();
 				setListAdapter(adapter);
 			}});
-		getExpandableListView().addHeaderView(nwk);
-		getExpandableListView().addFooterView(pwk);
+		getExpandableListView().addHeaderView(header);
 		setListAdapter(adapter);
     }
 
@@ -163,333 +154,11 @@ public class CalendarActivity extends ExpandableListActivity {
 	}
 	
 	
-	private List<CurrencyTO> getCurrencies() {
+	List<CurrencyTO> getCurrencies() {
 		return currencies;
 	}
 
 	
-	private class DateCalendarAdapter extends BaseExpandableListAdapter implements IEntryEditor{
-		
-
-		
-
-		private static final String TAG = "DateCalendarAdapter";
-		
-		private Calendar latest = Calendar.getInstance();
-		private Calendar earliest = Calendar.getInstance();
-		private DBHelper helper;
-		private Map<Date, List<Integer>> groups = new HashMap<Date, List<Integer>>();
-		private Map<Integer, EntryTO> children = new HashMap<Integer, EntryTO>();
-		private Date[] positions;
-
-
-		private EntryTO activeEntry;
-
-		private final SQLiteDatabase db;
-		
-		public  DateCalendarAdapter(Date date, int back, DBHelper helper){
-			try {
-				latest.setTime(SIMPLE_DATE_FORMAT.parse(SIMPLE_DATE_FORMAT.format(date)));
-			} catch (ParseException e) {
-				throw new RuntimeException(e);
-			}
-			earliest.setTime(latest.getTime());
-			earliest.add(Calendar.DAY_OF_YEAR, -1*back);
-			this.helper = helper;
-			positions = new Date[back];
-			db = helper.getReadableDatabase();
-			setDays();
-			
-		}
-		
-		private void setDays() {
-			Calendar tmp = Calendar.getInstance();
-			tmp.setTime(latest.getTime());
-			groups.clear();
-			children.clear();
-			for (int i = 0; i < positions.length; i++) {
-				positions[i] = tmp.getTime();
-				groups.put(positions[i], new ArrayList<Integer>());
-				tmp.add(Calendar.DAY_OF_YEAR, -1);
-			}
-			query();
-		}
-
-		public void moveTo(Date date){
-			try {
-				latest.setTime(SIMPLE_DATE_FORMAT.parse(SIMPLE_DATE_FORMAT.format(date)));
-			} catch (ParseException e) {
-				throw new RuntimeException(e);
-			}
-			earliest.setTime(latest.getTime());
-			earliest.add(Calendar.DAY_OF_YEAR, -1*(positions.length-1));
-			setDays();
-		}
-		
-		private void query() {
-			Cursor cursor = helper.queryCostEntryDate(db, CostQuery.BETWEEN_DATES, new String[]{
-								CostQuery.BETWEEN_DATES.getFormat().format(latest.getTime()),
-								CostQuery.BETWEEN_DATES.getFormat().format(earliest.getTime())}, 
-							false);
-			Date parsedDate = new Date();
-			Log.d(TAG+".query", "Returned Rows:" + cursor.getCount() );
-			if (cursor.getCount() > 0 ){
-				for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
-					try {
-						parsedDate = SIMPLE_DATE_FORMAT.parse(cursor.getString(ReportEntry.DATE.dbIndex()));
-					} catch (ParseException e) {
-						Log.w(TAG+".query", "Error while parsing date, using NOW", e);
-					}
-					final CurrencyTO entryCurr = new CurrencyTO(
-							cursor.getString(ReportEntry.SYMBOL.dbIndex()),
-							cursor.getInt(ReportEntry.CURRENCY_ID.dbIndex()),
-							cursor.getFloat(ReportEntry.EXCHANGE.dbIndex()),
-							cursor.getInt(ReportEntry.BASE.dbIndex()),
-							cursor.getString(ReportEntry.MNEMONIC.dbIndex()));
-					final CategoryTO cat = new CategoryTO(
-							cursor.getString(ReportEntry.TITLE.dbIndex()),
-							cursor.getInt(ReportEntry.CATEGORY_ID.dbIndex()),
-							cursor.getInt(ReportEntry.PARENT_CATEGORY_ID.dbIndex()),
-							cursor.getString(ReportEntry.ICON.dbIndex()),
-							cursor.getInt(ReportEntry.ICON_TYPE.dbIndex())
-							);
-					final EntryTO entry = new EntryTO(
-							cursor.getInt(ReportEntry.ENTRY_ID.dbIndex()),
-							cat, entryCurr,
-							cursor.getFloat(ReportEntry.COST.dbIndex()),
-							cursor.getString(ReportEntry.NOTES.dbIndex())
-							, parsedDate);
-					children.put(entry.getId(), entry);
-					if (groups.containsKey(parsedDate)){
-						groups.get(parsedDate).add(entry.getId());
-					} else {
-						groups.put(parsedDate, new ArrayList<Integer>());
-					}
-				}
-			}
-			cursor.close();
-		}
-
-		public Object getChild(int groupPosition, int childPosition) {
-			return children.get(groups.get(positions[groupPosition]).get(childPosition));
-		}
-
-		public long getChildId(int groupPosition, int childPosition) {
-			return groups.get(positions[groupPosition]).get(childPosition);
-		}
-
-		public int getChildrenCount(int groupPosition) {
-			return groups.get(positions[groupPosition]).size();
-		}
-
-		public Object getGroup(int groupPosition) {
-			final CurrencyTO defaultCurrency = getDefaultCurrency();
-			return DATE_INSTANCE.format(positions[groupPosition]) + " - " +
-					EntryTO.CURRENCY_FORMAT.format(sumarizeAndConvert(groups.get(positions[groupPosition]), defaultCurrency)) + " " +
-						defaultCurrency.getMnemonic() ;
-		}
-
-		private float sumarizeAndConvert(List<Integer> list,
-											CurrencyTO defaultCurrency) {
-			float total = 0.0f;
-			final List<CurrencyTO> allCurrencies = getCurrencies();
-			for (Integer childId : list) {
-				EntryTO entry = children.get(childId);
-				total += CurrencyTO.convertToCurrency(entry.getCost(), entry.getCurr(), defaultCurrency, allCurrencies);
-			}
-			return total;
-		}
-
-		private CurrencyTO getDefaultCurrency() {
-			int id = FrikPreferencesActivity.PreferenceManager.getDefaultCurrency();
-			return getCurrencies().get(getCurrencies().indexOf(new CurrencyTO(null, id, id, id, null)));
-		}
-
-		public int getGroupCount() {
-			return positions.length;
-		}
-
-		public long getGroupId(int groupPosition) {
-			return positions[groupPosition].getTime();
-		}
-
-		public boolean hasStableIds() {
-			return true;
-		}
-
-		public boolean isChildSelectable(int groupPosition, int childPosition) {
-			return true;
-		}
-		
-		public TextView getGenericView() {
-            // Layout parameters for the ExpandableListView
-            AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-                    ViewGroup.LayoutParams.FILL_PARENT, 48);
-
-            TextView textView = new TextView(CalendarActivity.this);
-            textView.setLayoutParams(lp);
-            // Center the text vertically
-            textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-            // Set the text starting position
-            textView.setPadding(36, 0, 0, 0);
-            return textView;
-		}
-
-		 
-        public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
-                View convertView, ViewGroup parent) {
-        	TextView textView;
-			if (convertView == null){
-				textView = getGenericView();
-				registerForContextMenu(textView);
-			} else {
-				textView = (TextView) convertView;
-			}
-            final EntryTO child = (EntryTO) getChild(groupPosition, childPosition);
-			textView.setText(child.toString());
-			textView.setTag(child);
-            textView.setOnClickListener(new OnClickListener(){
-
-				public void onClick(View arg0) {
-					setActiveEntry(child);
-					showDialog(EDIT_EXPENSE_DIALOG);
-				}});
-
-            return textView;
-        }
-        
-        
-
-		public View getGroupView(int groupPosition, boolean isExpanded, View convertView,
-                ViewGroup parent) {
-			TextView textView;
-			if (convertView == null){
-				textView = getGenericView();
-			} else {
-				textView = (TextView) convertView;
-			}
-            textView.setText(getGroup(groupPosition).toString());
-            if (SIMPLE_DATE_FORMAT.format(positions[groupPosition]).equals(SIMPLE_DATE_FORMAT.format(new Date()))){
-            	Log.w(TAG,"Group is today:" + groupPosition);
-            	textView.setTextAppearance(CalendarActivity.this, android.R.style.TextAppearance_Medium);
-            } else {
-            	textView.setTextAppearance(CalendarActivity.this, android.R.style.TextAppearance_Theme);
-            }
-            return textView;
-        }
-
-		private void setActiveEntry(EntryTO activeEnty) {
-			this.activeEntry = activeEnty;
-		}
-
-		private EntryTO getActiveEntry() {
-			return activeEntry;
-		}
-
-		public void insertEntry(EntryTO entryDAO) {
-			EntryEditorImpl.insertEntry(entryDAO, helper);
-			
-		}
-
-		public void updateEntry(EntryTO entry) {
-			EntryEditorImpl.updateEntry(entry, helper);
-			
-		}
-
-		public List<CategoryTO> getSubCategories() {			
-			final CategoryTO category = getActiveEntry().getCat();
-			final int parentId = category.getParentId();
-			Cursor c = helper.getAllSubCategories(db, parentId != -1?parentId:category.getId());
-			List<CategoryTO> l = new ArrayList<CategoryTO>();
-			if (parentId == -1){
-				l.add(category);
-			}
-			c.moveToFirst();
-			while (!c.isAfterLast()){
-				l.add(new CategoryTO(c.getString(Categories.TITLE.dbIndex()), 
-										c.getInt(Categories._ID.dbIndex()), 
-										c.getInt(Categories.PARENT_ID.dbIndex())));
-				c.moveToNext();
-			}
-			c.close();
-			return l;
-		}
-
-
-		public int getCategoryIcon(CategoryTO category ){
-			int icon = android.R.drawable.star_off;
-			if (category.getIconType() == Categories.ICON_RES_DRAWABLE){
-				try{ 
-					icon = Integer.parseInt(category.getIcon()); 
-				} catch (RuntimeException e){
-					Log.w(TAG, "Unexpected error for resource icon: " + category.getIcon() + " for category:" + category.getId(),e);
-				}
-			} else if (category.getParentId() != -1 ){
-				Cursor c = helper.getCategory(category.getParentId(), db);
-				if (c.getCount() > 0){
-					c.moveToFirst();
-					if (c.getInt(Categories.ICON_TYPE.dbIndex()) == Categories.ICON_RES_DRAWABLE){
-						icon = c.getInt(Categories.ICON.dbIndex());
-					}
-				}
-				c.close();
-			}
-			return icon;
-		}
-		
-		public int getActiveEntryIcon() {
-			return getCategoryIcon(getActiveEntry().getCat());
-		}
-
-		public void reset() {
-			setDays();
-		}
-		List<CategoryTO> categoryCache = null;
-		
-		public List<CategoryTO> getCategories() {
-			if (categoryCache == null){
-				Cursor c = helper.getAllCategories(db);
-				categoryCache = new ArrayList<CategoryTO>();
-				
-				c.moveToFirst();
-				while (!c.isAfterLast()){
-					categoryCache.add(new CategoryTO(c.getString(Categories.TITLE.dbIndex()), 
-											c.getInt(Categories._ID.dbIndex()), 
-											c.getInt(Categories.PARENT_ID.dbIndex())));
-					c.moveToNext();
-				}
-				c.close();
-			}
-			return categoryCache;
-		}
-
-		public List<CategoryTO> getSubCategories(CategoryTO selectedCat) {
-			int targetCategory = selectedCat.getParentId() != -1? selectedCat.getParentId():selectedCat.getId();
-			final Cursor c = helper.getAllSubCategories(db,targetCategory);
-			List<CategoryTO> l = new ArrayList<CategoryTO>();
-			if (selectedCat.getParentId() == -1){
-				l.add(selectedCat);
-			}
-			c.moveToFirst();
-			while (!c.isAfterLast()){
-				l.add(new CategoryTO(c.getString(Categories.TITLE.dbIndex()), 
-										c.getInt(Categories._ID.dbIndex()), 
-										c.getInt(Categories.PARENT_ID.dbIndex())));
-				c.moveToNext();
-			}
-			c.close();
-			return l;
-		}
-
-		public void deleteEntry(EntryTO tag) {
-			helper.deleteEntry(tag.getId(), db);
-			
-		}
-		
-
-		
-	}
-
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		Dialog dialog = null;
@@ -609,6 +278,21 @@ public class CalendarActivity extends ExpandableListActivity {
 								.setNegativeButton(android.R.string.cancel, DialogHelper.EMPTY_CLICK_LISTENER)
 								.create(); 
 				break;
+			case DISPLAY_DATE_DIALOG:
+				Calendar entry1 = Calendar.getInstance();
+				dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener(){
+
+					public void onDateSet(DatePicker view, int year,
+							int monthOfYear, int dayOfMonth) {
+						Log.w(TAG,"Date Go to:" + year + "/" + monthOfYear + "/" +dayOfMonth);
+						final Calendar date = Calendar.getInstance();
+						date.set(year, monthOfYear, dayOfMonth);
+						adapter.gotoDate(date);
+						getExpandableListView().invalidateViews();
+						setListAdapter(adapter);
+					}
+				}, entry1.get(Calendar.YEAR), entry1.get(Calendar.MONTH), entry1.get(Calendar.DAY_OF_MONTH));
+				break;
 		  default:
 			  dialog = super.onCreateDialog(id);
 		  break;
@@ -672,6 +356,7 @@ public class CalendarActivity extends ExpandableListActivity {
 			((DatePickerDialog)dialog).updateDate(entry.get(Calendar.YEAR), entry.get(Calendar.MONTH), entry.get(Calendar.DAY_OF_MONTH));
 			break;
 		case MOVE_CATEGORY_DIALOG:
+			//Needed, don't delete :)
 			break;
 		default:
 			super.onPrepareDialog(id, dialog);
@@ -680,6 +365,68 @@ public class CalendarActivity extends ExpandableListActivity {
 
 	private View getContextMenuView() {
 		return selectedView;
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.calendar_menu, menu);
+		MenuItem item = menu.findItem(R.id.menu_day);
+		item.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+
+			public boolean onMenuItemClick(MenuItem item) {
+				adapter.setTimeUnit(TimeUnits.Day);
+				getExpandableListView().invalidateViews();
+				setListAdapter(adapter);
+				nextBtn.setText("Next Week");
+				prevBtn.setText("Previous Week");
+				return false;
+			}});
+		
+		item = menu.findItem(R.id.menu_week);
+		item.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+
+			public boolean onMenuItemClick(MenuItem item) {
+				adapter.setTimeUnit(TimeUnits.Week);
+				getExpandableListView().invalidateViews();
+				setListAdapter(adapter);
+				nextBtn.setText("Next Month");
+				prevBtn.setText("Previous Month");
+				return false;
+			}});
+		
+
+		item = menu.findItem(R.id.menu_month);
+		item.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+
+			public boolean onMenuItemClick(MenuItem item) {
+				adapter.setTimeUnit(TimeUnits.Month);
+				getExpandableListView().invalidateViews();
+				setListAdapter(adapter);
+				nextBtn.setText("Next Year");
+				prevBtn.setText("Previous Year");
+				return false;
+			}});
+
+		item = menu.findItem(R.id.menu_year);
+		item.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+
+			public boolean onMenuItemClick(MenuItem item) {
+				adapter.setTimeUnit(TimeUnits.Year);
+				getExpandableListView().invalidateViews();
+				setListAdapter(adapter);
+				nextBtn.setText("Next 5 Years");
+				prevBtn.setText("Previous 5 Years");
+				return false;
+			}});
+		
+		item = menu.findItem(R.id.menu_gotodate);
+		item.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+
+			public boolean onMenuItemClick(MenuItem item) {
+				showDialog(DISPLAY_DATE_DIALOG);
+				return false;
+			}});
+		return true;
 	}
 	
 }

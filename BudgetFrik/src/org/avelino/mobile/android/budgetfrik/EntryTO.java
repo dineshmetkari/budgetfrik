@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 /**
  * License http://creativecommons.org/licenses/by-nc-sa/2.5/se/deed.en_US
  * See assets/license.html
@@ -15,6 +16,7 @@ public class EntryTO {
 	
 	public static final NumberFormat CURRENCY_FORMAT = NumberFormat.getCurrencyInstance();
 	public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
 
 	public EntryTO(CategoryTO cat, CurrencyTO curr, String cost, String notes) throws ParseException {
 		this.cat = cat;

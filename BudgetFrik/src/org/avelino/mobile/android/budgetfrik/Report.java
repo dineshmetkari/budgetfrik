@@ -1,5 +1,6 @@
 package org.avelino.mobile.android.budgetfrik;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 /**
@@ -8,9 +9,9 @@ import java.util.Map;
  * @author Avelino Benavides
  *
  */
-public interface Report {
+public interface Report extends Serializable {
 
-	public abstract Map<Integer, String> getReportData(IconGridAdapter adapter, ProgressListener progressListener);
+	public abstract Map<Integer, String> getReportData(ReportAdapter adapter, ProgressListener progressListener);
 
 	public abstract CurrencyTO getCurrency();
 

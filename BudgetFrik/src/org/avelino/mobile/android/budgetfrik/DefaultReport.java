@@ -20,6 +20,10 @@ import android.util.Log;
  */
 public class DefaultReport implements Report {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -77573950218285833L;
 	private CurrencyTO currency;
 	private CurrencyTO oldCurrency;
 	private final Map<Integer,String> report;
@@ -57,7 +61,7 @@ public class DefaultReport implements Report {
 	/* (non-Javadoc)
 	 * @see org.avelino.mobile.android.budgetfrik.Report#getReportData()
 	 */
-	public Map<Integer,String> getReportData(IconGridAdapter adapter, ProgressListener progress){
+	public Map<Integer,String> getReportData(ReportAdapter adapter, ProgressListener progress){
 		if (!isReportCalculated){
 			List<CurrencyTO> curr = adapter.getCurrencies();
 			//Today's expenses
@@ -192,11 +196,11 @@ public class DefaultReport implements Report {
 		R.string.this_d_exp,
 		R.string.last_d_exp,
 		R.string.this_w_exp,
-		R.string.this_w_exp,
+		R.string.last_w_exp,
 		R.string.this_m_exp,
-		R.string.this_m_exp,
+		R.string.last_m_exp,
 		R.string.this_y_exp,
-		R.string.this_y_exp,
+		R.string.last_y_exp,
 		R.string.total_exp,
 		R.string.currency_txt
 	},

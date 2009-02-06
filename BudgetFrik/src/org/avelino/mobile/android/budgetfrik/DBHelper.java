@@ -489,7 +489,8 @@ public class DBHelper extends SQLiteOpenHelper {
 		SIMPLE_MONTH ("strftime(\"%Y-%m\",date_created) = ? ", new SimpleDateFormat("yyyy-MM"),"currency_id"),
 		SIMPLE_YEAR ("strftime(\"%Y\",date_created) = ? ", new SimpleDateFormat("yyyy"),"currency_id"),
 		SIMPLE_ALL(null,null,"currency_id"),
-		BETWEEN_DATES ("date(?) <= date(date_created) or date(date_created) >= date(?)", new SimpleDateFormat("yyyy-MM-dd"),null);
+		//Old "date(?) <= date(date_created) or date(date_created) >= date(?)"
+		BETWEEN_DATES (" julianday(?) >= julianday(date_created) and julianday(?) <= julianday(date_created) ", new SimpleDateFormat("yyyy-MM-dd"),null);
 		
 		private final String query;
 		private final String group;
