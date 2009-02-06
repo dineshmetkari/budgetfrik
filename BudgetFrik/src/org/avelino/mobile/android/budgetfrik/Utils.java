@@ -14,6 +14,7 @@ import android.view.ViewGroup;
  */
 public class Utils {
 	private static final NumberFormat NUMBER_WEEK = NumberFormat.getNumberInstance();
+	@SuppressWarnings("unused")
 	private static final String TAG = "BudgetFrik.Utils";
 	static{
 		NUMBER_WEEK.setMinimumIntegerDigits(2);
