@@ -1,11 +1,6 @@
 package org.avelino.mobile.android.budgetfrik;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,13 +9,9 @@ import org.avelino.mobile.android.budgetfrik.DBHelper.Categories;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -30,7 +21,6 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 /**
@@ -40,19 +30,18 @@ import android.widget.ViewFlipper;
  *
  */
 public class BudgetFrikActivity extends Activity {
-	private static final EmptyClickListener EMPTY_CLICK_LISTENER = new EmptyClickListener();
 	
-	private static final int CHANGE_CURRENCY_DIALOG = 4;	
+	//private static final int CHANGE_CURRENCY_DIALOG = 4;	
 	
-	private static final int FILENAME_DIALOG = 2;
+	//private static final int FILENAME_DIALOG = 2;
 	
 	public static final int ENTRY_DETAILS_DIALOG = 1;
 	
 	private static final int UPDATE_CURRENCIES_DIALOG = 8;
 	
-	private static final int MAIN_CATEGORY_VIEW = 0;
+	//private static final int MAIN_CATEGORY_VIEW = 0;
 	
-	private static final int DEFAULT_REPORT_VIEW = 1;
+	//private static final int DEFAULT_REPORT_VIEW = 1;
 	
 	public static final String PREFS_NAME = "org.avelino.mobile.android.budgetfrik_preferences";
 	
@@ -60,134 +49,141 @@ public class BudgetFrikActivity extends Activity {
 	
 	private final IconGridAdapter adapter = new IconGridAdapter(this);
 	private ViewFlipper flipper;
-	private LayoutInflater layoutFactory;
 	private GridView mGrid;
-	private Report report;
 	private final ReportMenuListener reportMenuListener = new ReportMenuListener();
 	private CostDetailsListener costDetailsListener;
 
 
-	private static final class EmptyClickListener implements
-			DialogInterface.OnClickListener {
-		public void onClick(DialogInterface dialog,
-				int whichButton) {
-		}
-	}
-	private final class CSVReporter implements DialogInterface.OnClickListener {
-		public void onClick(DialogInterface dialog,
-				int which) {
-			String filename = ((EditText) ((Dialog) dialog)
-								.findViewById(R.id.Edit_Value))
-								.getText().toString();
-			int[][] heads = report.getHeadings();
-			final boolean canceled[] = {false};
-			Map<Integer, String> data = report.getReportData(adapter,new ProgressListener(){
-				public void setProgress(int p) {
-					}});
-			ProgressDialog mProgressDialog = new ProgressDialog(BudgetFrikActivity.this);
-			mProgressDialog.setIcon(android.R.drawable.ic_dialog_info);
-            mProgressDialog.setTitle(R.string.dialog_progress);
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            mProgressDialog.setMax(heads[0].length);
-            mProgressDialog.setOnCancelListener(new OnCancelListener(){
-
-				public void onCancel(DialogInterface dialog) {
-					canceled[0] = true;
-					
-				}});
-			try {
-				FileOutputStream fos = getApplicationContext()
-						.openFileOutput(filename,
-								MODE_WORLD_WRITEABLE);
-				mProgressDialog.show();
-				PrintStream out = new PrintStream(fos);
-				out.println("Heading;Value");
-				
-				for (int j = 0; j < heads[0].length;j++) {
-					if (canceled[0]){
-						mProgressDialog.setProgress(0);
-						break;
-					}
-					mProgressDialog.setProgress(j);
-					String heading = "N/A";
-					String value = "N/A";
-					heading = getApplicationContext().getString(heads[0][j]);
-					value = data.get(heads[1][j]);
-					out.printf("\"%s\";%s\n",
-							heading, value);
-				}
-				out.flush();
-				fos.close();
-				if (canceled[0]){
-					getApplicationContext().deleteFile(filename);
-				}
-			} catch (IOException e) {
-				Log.w(TAG,
-						"Error while exporting file:"
-								+ filename, e);
-				Dialog error = new AlertDialog.Builder(
-						BudgetFrikActivity.this)
-						.setMessage(
-								"Unable to export report as "
-										+ filename
-										+ "\nTry again.")
-						.setTitle("Export Error")
-						.setIcon(
-								android.R.drawable.ic_dialog_alert)
-						.create();
-				error.show();
-			} finally{
-				mProgressDialog.dismiss();
-			}
-
-		}
-	}
+//	private static final class EmptyClickListener implements
+//			DialogInterface.OnClickListener {
+//		public void onClick(DialogInterface dialog,
+//				int whichButton) {
+//		}
+//	}
+//	private final class CSVReporter implements DialogInterface.OnClickListener {
+//		public void onClick(DialogInterface dialog,
+//				int which) {
+//			String filename = ((EditText) ((Dialog) dialog)
+//								.findViewById(R.id.Edit_Value))
+//								.getText().toString();
+//			int[][] heads = report.getHeadings();
+//			final boolean canceled[] = {false};
+//			Map<Integer, String> data = report.getReportData(adapter,new ProgressListener(){
+//				public void setProgress(int p) {
+//					}});
+//			ProgressDialog mProgressDialog = new ProgressDialog(BudgetFrikActivity.this);
+//			mProgressDialog.setIcon(android.R.drawable.ic_dialog_info);
+//            mProgressDialog.setTitle(R.string.dialog_progress);
+//            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+//            mProgressDialog.setMax(heads[0].length);
+//            mProgressDialog.setOnCancelListener(new OnCancelListener(){
+//
+//				public void onCancel(DialogInterface dialog) {
+//					canceled[0] = true;
+//					
+//				}});
+//			try {
+//				FileOutputStream fos = getApplicationContext()
+//						.openFileOutput(filename,
+//								MODE_WORLD_WRITEABLE);
+//				mProgressDialog.show();
+//				PrintStream out = new PrintStream(fos);
+//				out.println("Heading;Value");
+//				
+//				for (int j = 0; j < heads[0].length;j++) {
+//					if (canceled[0]){
+//						mProgressDialog.setProgress(0);
+//						break;
+//					}
+//					mProgressDialog.setProgress(j);
+//					String heading = "N/A";
+//					String value = "N/A";
+//					heading = getApplicationContext().getString(heads[0][j]);
+//					value = data.get(heads[1][j]);
+//					out.printf("\"%s\";%s\n",
+//							heading, value);
+//				}
+//				out.flush();
+//				fos.close();
+//				if (canceled[0]){
+//					getApplicationContext().deleteFile(filename);
+//				}
+//			} catch (IOException e) {
+//				Log.w(TAG,
+//						"Error while exporting file:"
+//								+ filename, e);
+//				Dialog error = new AlertDialog.Builder(
+//						BudgetFrikActivity.this)
+//						.setMessage(
+//								"Unable to export report as "
+//										+ filename
+//										+ "\nTry again.")
+//						.setTitle("Export Error")
+//						.setIcon(
+//								android.R.drawable.ic_dialog_alert)
+//						.create();
+//				error.show();
+//			} finally{
+//				mProgressDialog.dismiss();
+//			}
+//
+//		}
+//	}
 	private final class ReportMenuListener implements OnMenuItemClickListener {
 
 		public boolean onMenuItemClick(MenuItem item) {
-			flipper.setDisplayedChild(DEFAULT_REPORT_VIEW);
-			report = adapter.getDefaultReport(FrikPreferencesActivity.PreferenceManager
-					.getDefaultCurrency());
-			displayReport();
+//			flipper.setDisplayedChild(DEFAULT_REPORT_VIEW);
+//			report = adapter.getDefaultReport(FrikPreferencesActivity.PreferenceManager
+//					.getDefaultCurrency());
+//			displayReport();
+//			return false;
+			
+			Intent intent = new Intent();
+			intent.putExtra(ReportActivity.REPORT, 
+								adapter.getDefaultReport(
+									FrikPreferencesActivity.PreferenceManager.getDefaultCurrency()));
+			intent.setClass(BudgetFrikActivity.this, ReportActivity.class);
+			startActivity(intent);
+			adapter.clearCache();
 			return false;
 		}
 	}
-	private void displayReport() {
-		final ProgressDialog dialog = new ProgressDialog(this);
-		try{
-			dialog.setTitle("Report in progress...");
-			dialog.setMax(100);
-			dialog.show();
-			Map<Integer, String> reportData = report.getReportData(adapter, new ProgressListener(){
-				final static float PROGRESS_RATE = 80/100;
-				public void setProgress(int p) {
-					dialog.setProgress((int)(p*PROGRESS_RATE));
-					
-				}});
-			dialog.setProgress(80);
-			int increment = 20/(1+reportData.size());
-			int progress = 80;
-			for (int keyid : reportData.keySet()) {
-				TextView tv = (TextView) flipper.findViewById(keyid);
-				tv.setText(reportData.get(keyid));
-				progress += increment;
-				dialog.setProgress(progress);
-			}
-		} finally {
-			dialog.dismiss();
-		}
-	}
+//	private void displayReport() {
+//		final ProgressDialog dialog = new ProgressDialog(this);
+//		try{
+//			dialog.setTitle("Report in progress...");
+//			dialog.setMax(100);
+//			dialog.show();
+//			Map<Integer, String> reportData = report.getReportData(adapter, new ProgressListener(){
+//				final static float PROGRESS_RATE = 80/100;
+//				public void setProgress(int p) {
+//					dialog.setProgress((int)(p*PROGRESS_RATE));
+//					
+//				}});
+//			dialog.setProgress(80);
+//			int increment = 20/(1+reportData.size());
+//			int progress = 80;
+//			for (int keyid : reportData.keySet()) {
+//				TextView tv = (TextView) flipper.findViewById(keyid);
+//				tv.setText(reportData.get(keyid));
+//				progress += increment;
+//				dialog.setProgress(progress);
+//			}
+//		} finally {
+//			dialog.dismiss();
+//		}
+//	}
 
 	// private List<ResolveInfo> mApps;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		layoutFactory = LayoutInflater.from(this);
+//		layoutFactory = LayoutInflater.from(this);
 		setContentView(R.layout.grid_1);
 		flipper = (ViewFlipper) findViewById(R.id.ViewFlipper01);
-		flipper.addView(layoutFactory.inflate(R.layout.defaultreport, null),
-				DEFAULT_REPORT_VIEW);
+//		flipper.addView(layoutFactory.inflate(R.layout.defaultreport, null),
+//				DEFAULT_REPORT_VIEW);
 		flipper.setInAnimation(this, android.R.anim.slide_in_left);
 		flipper.setOutAnimation(this, android.R.anim.slide_out_right);
 		mGrid = (GridView) findViewById(R.id.myGrid);
@@ -209,27 +205,27 @@ public class BudgetFrikActivity extends Activity {
 				costDetailsListener = new CostDetailsListener(adapter);
 				dialog = DialogHelper.getDataEntryDialog(currencies, costDetailsListener, this, new CalcButtonListener(costDetailsListener));
 			break;
-		case FILENAME_DIALOG:
-			dialog = getFilenameDialog();
-			break;
-		case CHANGE_CURRENCY_DIALOG:
-			dialog = new AlertDialog.Builder(this)
-					.setTitle(R.string.menu_curr)
-					.setItems(CurrencyTO.toStringArray(currencies),
-						new DialogInterface.OnClickListener() {
-	
-							public void onClick(DialogInterface dialog, int which) {
-								Log.v(TAG, "Chosen index:" + which);
-								Log.v(TAG, "Old currency:" + report.getCurrency());
-								report.changeCurrency(currencies
-										.get(which));
-								Log.v(TAG, "Changed currency:"
-										+ report.getCurrency());
-								displayReport();
-							}
-						})
-					.create();
-			break;
+//		case FILENAME_DIALOG:
+//			dialog = getFilenameDialog();
+//			break;
+//		case CHANGE_CURRENCY_DIALOG:
+//			dialog = new AlertDialog.Builder(this)
+//					.setTitle(R.string.menu_curr)
+//					.setItems(CurrencyTO.toStringArray(currencies),
+//						new DialogInterface.OnClickListener() {
+//	
+//							public void onClick(DialogInterface dialog, int which) {
+//								Log.v(TAG, "Chosen index:" + which);
+//								Log.v(TAG, "Old currency:" + report.getCurrency());
+//								report.changeCurrency(currencies
+//										.get(which));
+//								Log.v(TAG, "Changed currency:"
+//										+ report.getCurrency());
+//								displayReport();
+//							}
+//						})
+//					.create();
+//			break;
 		case UPDATE_CURRENCIES_DIALOG:
 			dialog = new AlertDialog.Builder(this)
 			.setTitle("Welcome!")
@@ -263,20 +259,20 @@ public class BudgetFrikActivity extends Activity {
 	}
 
 
-	private AlertDialog getFilenameDialog() {
-		final EditText textEntryView = new EditText(this);
-		textEntryView.setMaxLines(1);
-		textEntryView.setId(R.id.Edit_Value);
-		return new AlertDialog.Builder(this)
-					.setMessage(R.string.file_dialog_message)
-					.setTitle(R.string.file_dialog_title)
-					.setView(textEntryView)
-					.setPositiveButton(android.R.string.ok,
-							new CSVReporter())
-					.setNegativeButton(android.R.string.cancel,
-							EMPTY_CLICK_LISTENER)
-					.create();
-	}
+//	private AlertDialog getFilenameDialog() {
+//		final EditText textEntryView = new EditText(this);
+//		textEntryView.setMaxLines(1);
+//		textEntryView.setId(R.id.Edit_Value);
+//		return new AlertDialog.Builder(this)
+//					.setMessage(R.string.file_dialog_message)
+//					.setTitle(R.string.file_dialog_title)
+//					.setView(textEntryView)
+//					.setPositiveButton(android.R.string.ok,
+//							new CSVReporter())
+//					.setNegativeButton(android.R.string.cancel,
+//							EMPTY_CLICK_LISTENER)
+//					.create();
+//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -317,50 +313,50 @@ public class BudgetFrikActivity extends Activity {
 	public boolean onPrepareOptionsMenu(Menu menu){
 		super.onPrepareOptionsMenu(menu);
 		boolean display = false;
-		switch (flipper.getDisplayedChild()){
-			case MAIN_CATEGORY_VIEW:
+//		switch (flipper.getDisplayedChild()){
+//			case MAIN_CATEGORY_VIEW:
 				menu.clear();
 				buildMainMenu(menu);
 				display = true;
-				break;
-			case DEFAULT_REPORT_VIEW:
-				menu.clear();
-				buildReportMenu(menu);
-				display = true;
-				break;
-		}
+//				break;
+//			case DEFAULT_REPORT_VIEW:
+//				menu.clear();
+//				buildReportMenu(menu);
+//				display = true;
+//				break;
+//		}
 		return display;
 	}
 
-	private void buildReportMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.reports_menu, menu);
-		MenuItem item = menu.findItem(R.id.back2main_menuitem);
-		item.setIcon(android.R.drawable.ic_menu_gallery);//R.drawable.cal_icon);
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {
-				flipper.setDisplayedChild(MAIN_CATEGORY_VIEW);
-				return false;
-			}
-		});
-		
-		item = menu.findItem(R.id.reports_menuitem);
-		item.setIcon(android.R.drawable.ic_menu_report_image );//R.drawable.budgetfrik);
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {
-				showDialog(CHANGE_CURRENCY_DIALOG);
-				return false;
-			}
-		});
-		
-		item = menu.findItem(R.id.save_menuitem);
-		item.setIcon(android.R.drawable.ic_menu_save);//R.drawable.view_icon);
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {
-				showDialog(FILENAME_DIALOG);
-				return false;
-			}
-		});
-	}
+//	private void buildReportMenu(Menu menu) {
+//		getMenuInflater().inflate(R.menu.reports_menu, menu);
+//		MenuItem item = menu.findItem(R.id.back2main_menuitem);
+//		item.setIcon(android.R.drawable.ic_menu_gallery);//R.drawable.cal_icon);
+//		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+//			public boolean onMenuItemClick(MenuItem item) {
+//				flipper.setDisplayedChild(MAIN_CATEGORY_VIEW);
+//				return false;
+//			}
+//		});
+//		
+//		item = menu.findItem(R.id.reports_menuitem);
+//		item.setIcon(android.R.drawable.ic_menu_report_image );//R.drawable.budgetfrik);
+//		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+//			public boolean onMenuItemClick(MenuItem item) {
+//				showDialog(CHANGE_CURRENCY_DIALOG);
+//				return false;
+//			}
+//		});
+//		
+//		item = menu.findItem(R.id.save_menuitem);
+//		item.setIcon(android.R.drawable.ic_menu_save);//R.drawable.view_icon);
+//		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+//			public boolean onMenuItemClick(MenuItem item) {
+//				showDialog(FILENAME_DIALOG);
+//				return false;
+//			}
+//		});
+//	}
 
 	@Override
 	protected void onDestroy() {
@@ -414,13 +410,13 @@ public class BudgetFrikActivity extends Activity {
 			currAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			costDetailsListener.onPrepare();
 			break;
-		case FILENAME_DIALOG:
-			((EditText) dialog.findViewById(R.id.Edit_Value))
-					.setText(new SimpleDateFormat("yyyy_MM_dd")
-							.format(new Date())
-							+ ".csv");
-
-			break;
+//		case FILENAME_DIALOG:
+//			((EditText) dialog.findViewById(R.id.Edit_Value))
+//					.setText(new SimpleDateFormat("yyyy_MM_dd")
+//							.format(new Date())
+//							+ ".csv");
+//
+//			break;
 		default:
 			break;
 		}
