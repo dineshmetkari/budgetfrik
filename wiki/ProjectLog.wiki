@@ -18,7 +18,7 @@ I cannot pay you, but you will contribute to Open Source. I will place your name
 
 = Releases =
 
-== Beta 1 (current) ==
+== Beta 1 (deprecated) ==
 
 First Beta delivering basic functionality and usability
 
@@ -30,25 +30,38 @@ First Beta delivering basic functionality and usability
   * Simplex sorting of categories/Subcategories (Last Used First)
 
 
-== Beta 2 (Q1-2009) ==
+== Beta 2 (Current) ==
 
-  * Calendar View
-  * Edit/Delete previous expenses
-  * Fix Bugs
-  * Make Reports a 1st class Activity
-  * Add report by category
-  * Add data validations
+  * Calendar View - Done
+  * Edit/Delete previous expenses - Done
+  * Fix Bugs - Done and introduced new ones :)
+  * Make Reports a 1st class Activity - Done
+  * Add report by category - Moved to next release
+  * Add data validations - Done
 
 == Beta 3(Q2-2009) ==
 
-  * Add more WebServices
+  * Add more currency exchange WebServices
+  * Add report by category
   * Start with features on the road map
   * Release GA (General Availability)
   * Redo artwork and usability based on feedback and use
+
+== RC 1.0(Q3-2009) ==
+
   * Test on a real phone
   * Credits Screen
+  * Fix Change of layout
+  * Introduce Recurrent Expenses
+  * Add to Android Marketplace
 
-== GA 1.0(Q2-2009) ==
+== RC 1.1(Q4-2009) ==
+
+ * Introduce expenses by trip
+ * Calculate reports and calendar lump sums based on the currency exchange when the expense was done
+ * iPhone version 1.0
+ * Backup-Restore to Google data
+ 
 
 = Road Map (a.k.a wish list)=
 
@@ -58,10 +71,11 @@ First Beta delivering basic functionality and usability
    * Graphical reports and expenses
    * Bluetooth, SMS and EMail Reports
    * Integrate with Google Apps
-   * Integrate with Facebook
+   * Integrate with Facebook - err why?
    * Backups and merges
    * J2ME Version
-   * IPhone Version
+   * iPhone Version - on the works
+   * Windows Mobile Version
    * Enterprise Version (opensource but not free) - Custom reporting/ERP integration
    * Add/Remove expenses categories/subcategories
    * Smart Category Sorting
