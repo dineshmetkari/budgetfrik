@@ -211,11 +211,13 @@ If you select *Move Category* a list with all the categories is shown, if you ca
 <table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/raIE4C-Gi0hnlFIAEVWryw?feat=embedwebsite"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SfLot3sddvI/AAAAAAAAAII/n-z9V0YZ0tU/s144/Picture%206.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Category List</td></tr></table>
 
 After you select one category the subcategory list is presented. If you touch *Ok* the category is selected - no subcategory - if you touch a subcategory, that will be set.
+
 <table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/O3pH-4-suJcHt_Gu8Yd2oA?feat=embedwebsite"><img src="http://lh6.ggpht.com/_kwr3zmbEX4M/SfLot84AsjI/AAAAAAAAAIQ/7dNEyJY1XMk/s144/Picture%207.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">SubCategory List</td></tr></table>
 
 Touch *Back* to change the category or *Cancel* to dismiss any changes.
 
 <table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/XQIFJjNI8Iz0Mn0xS7-F6A?feat=embedwebsite"><img src="http://lh5.ggpht.com/_kwr3zmbEX4M/SfLmOvt44fI/AAAAAAAAAHo/EhtLgEIoVLw/s144/Picture%202.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Change Date</td></tr></table>
+
 If you select *Change Date* a dialog with a date show, simply choose the date and touch *Set* and the changes will be done.
 <table style="width:auto;"><tr><td>
 <a href="http://picasaweb.google.com/lh/photo/cN5o6XXVVGoD7ZFCRvwi5g?feat=embedwebsite"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SfLouLT0SiI/AAAAAAAAAIY/dMBrIGd7GzU/s144/Picture%208.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Day View, Edited expenses</td></tr></table>
