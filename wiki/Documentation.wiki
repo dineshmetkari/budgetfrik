@@ -154,9 +154,67 @@ To enter the amount you can just click the calculator-like buttons or use the ke
 
 Optionally, you can enter some text. Click OK and you are done.  To erase something just click the *c* button. I added a double zero for those big expenders. Click cancel if you changed your mind. 
 
-= Viewing/Editing Expenses =
+= Viewing Expenses =
 
-Maybe in the next release
+You can see your expenses arranged by date clicking/touching *Calendar* on the main menu.
+There are several ways to see your expenses.  By default you are to the *Day View*, clicking the menu button shows up all the different available views:
+ * Day View - Where you see the expenses lump-sum on daily basis one week at a time
+ * Week View - Where you see the expenses lump-sum on a weekly basis one month at a time
+ * Month View - Where you see the expenses lump-sum on a monthly basis one year at a time
+ * Year View - Where you see the expenses lump-sum on a year basis five years at a time
+
+All the views work basically in the same.
+At the top you have a couple of arrow buttons that will take you into the next or previous period. I.e. if you are in *Day View* the next button will take you to the next week; if you are in *Month View* the next button will take you yo the next year, and so on.
+Every row represents a time period corresponding to the view - day, week, month and year. Next to the date you'll find the lump sum of the expenses you've made during that period.
+When you click/touch a row on the screen the date expands and shows the individual expenses in their original currency. 
+
+To go to a particular date, just touch *Go to Date* after the menu button.
+Select the date and touch *Set*
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/XQIFJjNI8Iz0Mn0xS7-F6A?feat=embedwebsite"><img src="http://lh5.ggpht.com/_kwr3zmbEX4M/SfLmOvt44fI/AAAAAAAAAHo/EhtLgEIoVLw/s144/Picture%202.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="http://picasaweb.google.com/AvelinoAndretti/BudgetFrik?feat=embedwebsite">BudgetFrik</a></td></tr></table>
+
+
+No shortcut yet to change the currency, it uses the default currency which you can change in the preferences screes.
+There are few subtleties between the views:
+
+ 
+ * Day View - Starts on Sunday
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/rxbCFIK72omwm1ueEEAikA?feat=embedwebsite"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SfLlKyJdjCI/AAAAAAAAAHI/h0Me2ZN1WI0/s288/DayView.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="http://picasaweb.google.com/AvelinoAndretti/BudgetFrik?feat=embedwebsite">BudgetFrik</a></td></tr></table>
+
+ * Week View - Starts on the first week of the month, this may include days from the previous month if the 1st of the month starts, say on a Wednesday
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/SnZk1XjBXYx8vxzs-TDPLw?feat=embedwebsite"><img src="http://lh5.ggpht.com/_kwr3zmbEX4M/SfLlLMN2_5I/AAAAAAAAAHY/RUGcTPBgcJA/s288/WeekView.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="http://picasaweb.google.com/AvelinoAndretti/BudgetFrik?feat=embedwebsite">BudgetFrik</a></td></tr></table>
+
+ * Month View - Nothing special
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/yK-hCdN7M074s7U3wyCXuQ?feat=embedwebsite"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SfLlK11J_DI/AAAAAAAAAHQ/WFwUQ96Geqc/s288/MonthView.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="http://picasaweb.google.com/AvelinoAndretti/BudgetFrik?feat=embedwebsite">BudgetFrik</a></td></tr></table>
+
+ * Year View - By Default shows two years in the past and two years in the future
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/90MssbofRMpECTom7SLBQg?feat=embedwebsite"><img src="http://lh6.ggpht.com/_kwr3zmbEX4M/SfLlLOSvMeI/AAAAAAAAAHg/GCu8hUNS8pc/s288/YearView.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="http://picasaweb.google.com/AvelinoAndretti/BudgetFrik?feat=embedwebsite">BudgetFrik</a></td></tr></table>
+
+ 
+= Modify Expenses =
+
+After you entered an expense the only way - for now - to correct it is to go to the *Calendar* and search for it manually in any of the views. Expand and touch the row.
+
+The expenses dialog will show-up. You can change the category, amount, notes or currency 
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/M6vI6q5LQdKsoP6J5B00Ew?feat=embedwebsite"><img src="http://lh6.ggpht.com/_kwr3zmbEX4M/SfLm-FAX_RI/AAAAAAAAAHw/ffH4AluCwFw/s144/Picture%203.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="http://picasaweb.google.com/AvelinoAndretti/BudgetFrik?feat=embedwebsite">BudgetFrik</a></td></tr></table>
+
+If you touch and hold on top of the expense, a context menu appears.
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/NKFO_B15iRRLsL1yoeOwlA?feat=embedwebsite"><img src="http://lh5.ggpht.com/_kwr3zmbEX4M/SfLotGB6iWI/AAAAAAAAAH4/4mcWK4hr2e8/s144/Picture%204.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="http://picasaweb.google.com/AvelinoAndretti/BudgetFrik?feat=embedwebsite">BudgetFrik</a></td></tr></table>
+
+From there you can *edit* as described above, *Move Category*, *Change Date* or *Delete*
+
+If you select *Move Category* a list with all the categories is shown, if you cancel (with the back button) no change is made. 
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/raIE4C-Gi0hnlFIAEVWryw?feat=embedwebsite"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SfLot3sddvI/AAAAAAAAAII/n-z9V0YZ0tU/s144/Picture%206.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="http://picasaweb.google.com/AvelinoAndretti/BudgetFrik?feat=embedwebsite">BudgetFrik</a></td></tr></table>
+
+After you select one category the subcategory list is presented. If you touch *Ok* the category is selected - no subcategory - if you touch a subcategory, that will be set.
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/O3pH-4-suJcHt_Gu8Yd2oA?feat=embedwebsite"><img src="http://lh6.ggpht.com/_kwr3zmbEX4M/SfLot84AsjI/AAAAAAAAAIQ/7dNEyJY1XMk/s144/Picture%207.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="http://picasaweb.google.com/AvelinoAndretti/BudgetFrik?feat=embedwebsite">BudgetFrik</a></td></tr></table>
+ Touch *Back* to change the category or *Cancel* to dismiss any changes.
+
+
+If you select *Change Date* a dialog with a date show, simply choose the date and touch *Set* and the changes will be done.
+
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/O3pH-4-suJcHt_Gu8Yd2oA?feat=embedwebsite"><img src="http://lh6.ggpht.com/_kwr3zmbEX4M/SfLot84AsjI/AAAAAAAAAIQ/7dNEyJY1XMk/s144/Picture%207.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">From <a href="http://picasaweb.google.com/AvelinoAndretti/BudgetFrik?feat=embedwebsite">BudgetFrik</a></td></tr></table>
 
 = Viewing Reports =
 
@@ -185,7 +243,6 @@ Depends on the amount of data you have inserted what you will see. These are the
 
 The values are the lump sum of expenses made on the day/week/month/year/ever.  At the bottom it will display what currency is used.  The good: All expenses are converted to the target currency using the application's exchange (which you can update automatically).  The not so good: The conversion is fixed i.e. not using the rate of date that the expense happened, but all will be converted to the application's exchange (you know you can update they, don't you?)
 
-One word of ... well a feature. Don't click the *back* button to go back to the main menu. Click *Menu* and then *Back*.  I'm working on that for the next release.
 
 === Changing Report Currency ===
 
@@ -296,4 +353,4 @@ You are your own worst enemy, so click OK on the dialog below if you think you c
 
 Disclosure:
 
-I'm an HP employee in Sweden and I work on this during my free time.
+I'm an fulltime employee in Sweden and I work on this during my free time.
