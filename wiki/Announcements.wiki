@@ -7,9 +7,8 @@
 
 BudgetFrik Beta 0.2 launched!
 
-=== Details ===
+=== Features ===
 
-Features
   * Edit expenses - Category/SubCategory, Notes, Currency, Value and Date
   * Delete expenses
   * Calendar with 4 views: Day, Week, Month and Year
