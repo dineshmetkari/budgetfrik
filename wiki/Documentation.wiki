@@ -178,18 +178,18 @@ There are few subtleties between the views:
 
  
  * Day View - Starts on Sunday
-<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/rxbCFIK72omwm1ueEEAikA?feat=embedwebsite"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SfLlKyJdjCI/AAAAAAAAAHI/h0Me2ZN1WI0/s288/DayView.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Day View</td></tr></table>
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/rxbCFIK72omwm1ueEEAikA?feat=embedwebsite"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SfLlKyJdjCI/AAAAAAAAAHI/h0Me2ZN1WI0/s288/DayView.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Day View - Menu on top</td></tr></table>
 
  * Week View - Starts on the first week of the month, this may include days from the previous month if the 1st of the month starts, say on a Wednesday
 
-<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/SnZk1XjBXYx8vxzs-TDPLw?feat=embedwebsite"><img src="http://lh5.ggpht.com/_kwr3zmbEX4M/SfLlLMN2_5I/AAAAAAAAAHY/RUGcTPBgcJA/s288/WeekView.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Week View</td></tr></table>
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/SnZk1XjBXYx8vxzs-TDPLw?feat=embedwebsite"><img src="http://lh5.ggpht.com/_kwr3zmbEX4M/SfLlLMN2_5I/AAAAAAAAAHY/RUGcTPBgcJA/s288/WeekView.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Week View - Date Expanded</td></tr></table>
 
  * Month View - Nothing special
-<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/yK-hCdN7M074s7U3wyCXuQ?feat=embedwebsite"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SfLlK11J_DI/AAAAAAAAAHQ/WFwUQ96Geqc/s288/MonthView.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Month View</td></tr></table>
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/yK-hCdN7M074s7U3wyCXuQ?feat=embedwebsite"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SfLlK11J_DI/AAAAAAAAAHQ/WFwUQ96Geqc/s288/MonthView.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Month View - Date Expanded</td></tr></table>
 
  * Year View - By Default shows two years in the past and two years in the future
 
-<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/yK-hCdN7M074s7U3wyCXuQ?feat=embedwebsite"><a href="http://picasaweb.google.com/lh/photo/cN5o6XXVVGoD7ZFCRvwi5g?feat=embedwebsite"><img src="http://lh3.ggpht.com/_kwr3zmbEX4M/SfLouLT0SiI/AAAAAAAAAIY/dMBrIGd7GzU/s144/Picture%208.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Year View</td></tr></table>
+<table style="width:auto;"><tr><td><a href="http://picasaweb.google.com/lh/photo/90MssbofRMpECTom7SLBQg?feat=embedwebsite"><img src="http://lh6.ggpht.com/_kwr3zmbEX4M/SfLlLOSvMeI/AAAAAAAAAHg/GCu8hUNS8pc/s288/YearView.png" /></a></td></tr><tr><td style="font-family:arial,sans-serif; font-size:11px; text-align:right">Year View</td></tr></table>
 
  
 = Modify Expenses =
