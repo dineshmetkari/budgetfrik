@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:id="@+id/TextView01" 
+	android:layout_height="wrap_content" 
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:capitalize="words" 
+	android:clickable="false" 
+	android:editable="false" 
+	 
+	android:focusable="false" 
+	android:focusableInTouchMode="false" 
+	android:width="400px" 
+	android:height="100px" 
+	android:textColor="@android:color/white" android:shadowColor="@android:color/black" android:shadowDx="2" android:shadowDy="2" android:shadowRadius="0.9" android:background="@android:drawable/toast_frame" android:layout_width="fill_parent"></TextView>
