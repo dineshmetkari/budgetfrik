@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/enterdetailsLayout" 
+	android:layout_height="fill_parent" android:layout_width="fill_parent">
+
+<TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Calculator" android:layout_toRightOf="@+id/LLayout2" android:gravity="right" android:layout_alignWithParentIfMissing="true" android:layout_alignParentTop="true" android:layout_alignParentLeft="true">
+<TableRow android:id="@+id/CalcTableRow03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="0px">
+	<Button android:id="@+id/CalcButton07" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="7" android:padding="0px" android:height="8pt" android:width="8pt"></Button>
+	<Button android:id="@+id/CalcButton08" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8" android:padding="0px" android:height="8pt" android:width="8pt"></Button>
+	<Button android:id="@+id/CalcButton09" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="9" android:height="8pt" android:padding="0px" android:width="8pt"></Button><Button android:id="@+id/CalcButton0" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:padding="0px" android:height="8pt" android:width="8pt"></Button>
+	
+</TableRow>
+<TableRow android:id="@+id/CalcTableRow02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="0px"><Button android:id="@+id/CalcButton03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3" android:height="8pt" android:width="8pt" android:padding="0px"></Button><Button android:id="@+id/CalcButton04" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4" android:padding="0px" android:height="8pt" android:width="8pt"></Button>
+	
+	<Button android:id="@+id/CalcButton05" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5" android:height="8pt" android:padding="0px" android:width="8pt"></Button>
+	<Button android:id="@+id/CalcButton06" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6" android:height="8pt" android:width="8pt" android:padding="0px" ></Button>
+</TableRow>
+
+<TableRow android:id="@+id/CalcTableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="0px">
+	<Button android:id="@+id/CalcButton01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1" android:padding="0px"  android:height="8pt" android:width="8pt"></Button>
+	<Button android:id="@+id/CalcButton02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2" android:height="8pt" android:padding="0px" android:width="8pt"></Button>
+	
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="." android:id="@+id/CalcButtonDot" android:height="8pt" android:width="8pt" android:padding="0px"></Button><Button android:id="@+id/CalcButtonC" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="c" android:height="8pt" android:width="8pt" android:padding="0px"></Button></TableRow>
+<TableRow android:id="@+id/CalcTableRow04" android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="0px">
+	
+	<Button android:id="@+id/CalcButton00" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="00" android:height="8pt" android:padding="0px" android:width="8pt"></Button>
+	
+</TableRow>
+</TableLayout>
+<Spinner android:id="@+id/ChooseSubCat" android:layout_alignParentTop="true" android:layout_height="wrap_content" android:layout_gravity="right" android:layout_weight="0.1" android:layout_width="wrap_content" android:layout_toRightOf="@+id/Calculator"></Spinner><LinearLayout 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/LLayout2" 
+	android:layout_alignRight="@+id/Edit_Notes" android:layout_alignParentRight="true" android:gravity="left|fill_horizontal" android:layout_below="@+id/ChooseSubCat">
+	
+	<Spinner android:id="@+id/ChooseCurrency" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:layout_weight="0.1" android:layout_gravity="left"></Spinner><EditText android:id="@+id/Edit_Value" android:textSize="10pt" android:layout_height="wrap_content" android:layout_weight="0.9" android:numeric="decimal" android:layout_width="wrap_content" android:maxLines="1" android:layout_alignParentRight="false" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" android:layout_gravity="right|fill_horizontal"></EditText>
+	</LinearLayout>
+<TextView android:id="@+id/Text_Notes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/notes" android:layout_below="@+id/LLayout2" android:gravity="left" android:layout_alignLeft="@+id/ChooseSubCat"></TextView>
+
+
+
+
+<EditText android:id="@+id/Edit_Notes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scrollbars="horizontal|vertical" android:singleLine="false" android:scrollbarAlwaysDrawHorizontalTrack="true" android:scrollbarAlwaysDrawVerticalTrack="true" android:maxEms="5" android:layout_alignParentLeft="false" android:layout_alignParentRight="true" android:layout_toRightOf="@+id/Text_Notes" android:layout_below="@+id/LLayout2" android:gravity="bottom|right|fill_horizontal"></EditText>
+
+
+
+</RelativeLayout>
