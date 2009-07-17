@@ -261,4 +261,12 @@ public class ReportActivity extends Activity {
 		}
 	}
 
+	@Override
+	protected void onDestroy() {
+		if (adapter != null){
+			adapter.close();
+		}
+		super.onDestroy();
+	}
+
 }
