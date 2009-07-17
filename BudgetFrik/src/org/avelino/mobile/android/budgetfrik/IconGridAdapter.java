@@ -19,27 +19,33 @@ import org.avelino.mobile.android.budgetfrik.DBHelper.ReportEntry;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Gallery;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.AbsListView.LayoutParams;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 /**
  * License http://creativecommons.org/licenses/by-nc-sa/2.5/se/deed.en_US
  * See assets/license.html
  * @author Avelino Benavides
  *
  */
-public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnFocusChangeListener, IEntryEditor {
+public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnFocusChangeListener, IEntryEditor, OnItemSelectedListener {
     
     
-    private static final LayoutParams IMG_BTN_LAYOUT_PARAMS = new GridView.LayoutParams(80, 80);
+    private static final Gallery.LayoutParams IMG_BTN_LAYOUT_PARAMS = new Gallery.LayoutParams(80, 80);
+    //// private static final LayoutParams IMG_BTN_LAYOUT_PARAMS = new GridView.LayoutParams(80, 80);
 	private static final String TAG = "IconGridAdapter";
 	/**
 	 * 
@@ -72,11 +78,10 @@ public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnF
             	{
             		setTag(new LinkedHashMap<Categories,Object>());
             		setLayoutParams(IMG_BTN_LAYOUT_PARAMS);
-            		setScaleType(ImageView.ScaleType.FIT_CENTER);//CENTER_INSIDE, FIT_CENTER
+            		setScaleType(ImageView.ScaleType.FIT_XY);//CENTER_INSIDE, FIT_CENTER
+            		setFocusable(true);
+            		setFocusableInTouchMode(true);
             		}
-
-            	
-            	
             };
             
         } else {
@@ -98,10 +103,11 @@ public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnF
         map.put(Categories.PARENT_ID, cx.getInt(Categories.PARENT_ID.dbIndex()));
         ivew.setOnClickListener(this);
         ivew.setOnFocusChangeListener(this);
+        ((Gallery)parent).setOnItemSelectedListener(this);
         if (position == 0){
-        	ivew.requestFocusFromTouch();
         	ivew.requestFocus();
         }
+        ivew.setId(position);
         return ivew;
     }
 
@@ -112,39 +118,83 @@ public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnF
 
     public final Object getItem(int position) {
     	//ImageViews created in getView
+    	Log.i(TAG,"getItem:"+position);
     	Cursor itm = fetchData();
     	itm.moveToPosition(position);
         return itm.getString(Categories.TITLE.dbIndex());
     }
 
     public final long getItemId(int position) {
-    	Cursor itm = fetchData();
-    	itm.moveToPosition(position);
-        return itm.getLong(Categories._ID.dbIndex());
+//    	Cursor itm = fetchData();
+//    	itm.moveToPosition(position);
+//        return itm.getLong(Categories._ID.dbIndex());
+    	Log.i(TAG,"getItemId:"+position);
+//    	StackTraceElement[] st = Thread.currentThread().getStackTrace();
+//    	for (int i = 0; i < st.length; i++) {
+//    		Log.i(TAG,"getItemId.Stack:"+st[i].toString());
+//		}
+//    	
+    	return position;
     }
 
 
 	public void onClick(View iview) {
+		Log.d(TAG,"onClick");
 		//iview.startAnimation(iview.getAnimation());
 		ImageButton view = (ImageButton) iview;
-		this.activeObj = view;
-		gridActivity.showDialog(BudgetFrikActivity.ENTRY_DETAILS_DIALOG);
+		
+		//// gridActivity.showDialog(BudgetFrikActivity.ENTRY_DETAILS_DIALOG);
+		if (gridActivity instanceof BudgetFrikActivity && view.getParent() instanceof Gallery){
+			onitemselected = true;
+			((Gallery)view.getParent()).setSelection(view.getId());
+			view.requestFocus();
+			view.requestFocusFromTouch();
+		}
 	}
 
+	
 
-	@SuppressWarnings("unchecked")
-	public void onFocusChange(View iview, boolean hasFocus) {
-		Log.d("FocusChange",iview + ":" + hasFocus);
-		if (hasFocus){
-			ImageButton view = (ImageButton) iview;
-			TextView mLblGrid = (TextView) gridActivity.findViewById(R.id.myGridLabel);
-			mLblGrid.setText(((Map <Categories,Object>)view.getTag()).get(Categories.TITLE).toString());
-		} else {
-			TextView mLblGrid = (TextView) gridActivity.findViewById(R.id.myGridLabel);
-			mLblGrid.setText("");
+	private boolean onitemselected = true;
+	
+	public void onItemSelected(AdapterView<?> parent, View view, int position,	long id) {
+		Log.d(TAG,"onItemSelected");
+		onitemselected = true;
+		this.activeObj = view;
+		//parent.setSelection(position);
+		//view.requestFocusFromTouch();
+		if (gridActivity instanceof BudgetFrikActivity){
+			((BudgetFrikActivity)gridActivity).onIconFocusChange((Map <Categories,Object>)view.getTag());
 		}
 		
 	}
+
+	public void onNothingSelected(AdapterView<?> parent) {
+		Log.d(TAG,"onNothingSelected");
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	public void onFocusChange(View iview, boolean hasFocus) {
+//		Log.d("FocusChange",iview + ":" + hasFocus);
+		Log.d(TAG,"onFocusChange");
+		if (hasFocus){	
+			ImageButton view = (ImageButton) iview;
+			//view.requestFocusFromTouch();
+			//// TextView mLblGrid = (TextView) gridActivity.findViewById(R.id.myGridLabel);
+			//// mLblGrid.setText(((Map <Categories,Object>)view.getTag()).get(Categories.TITLE).toString());
+			if (onitemselected && gridActivity instanceof BudgetFrikActivity && view.getParent() instanceof Gallery){
+				onitemselected = false;
+				((Gallery)view.getParent()).setSelection(view.getId());
+				view.requestFocusFromTouch();
+			}
+		} else {
+			//// TextView mLblGrid = (TextView) gridActivity.findViewById(R.id.myGridLabel);
+			//// mLblGrid.setText("");
+		}
+		
+	}
+	
+	
 	
 	private Cursor fetchData(){
 		if (cursor == null){
@@ -245,7 +295,7 @@ public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnF
 								CurrencyTO targetCurr, List<CurrencyTO> currs) {
 		float totalCost = 0.0f;
 		Date parsedDate = new Date();
-		Log.d(TAG+".sumarizeAndConvert", "Returned Rows:" + cursor.getCount() );
+//		Log.d(TAG+".sumarizeAndConvert", "Returned Rows:" + cursor.getCount() );
 		if (cursor.getCount() > 0 ){
 			try {
 				cursor.moveToFirst();
@@ -262,7 +312,7 @@ public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnF
 						cursor.getInt(ReportEntry.BASE.dbIndex()),
 						cursor.getString(ReportEntry.MNEMONIC.dbIndex()));
 				final float orgCost = cursor.getFloat(ReportEntry.COST.dbIndex());
-				Log.d(TAG+".sumarizeAndConvert", "Row:" + cursor.getPosition() + ", cost:" + orgCost + " Curr:" + entryCurr.getId());
+//				Log.d(TAG+".sumarizeAndConvert", "Row:" + cursor.getPosition() + ", cost:" + orgCost + " Curr:" + entryCurr.getId());
 				totalCost  += CurrencyTO.convertToCurrency(orgCost, entryCurr, targetCurr, currs);
 			}
 		}
@@ -274,6 +324,17 @@ public class IconGridAdapter extends BaseAdapter implements OnClickListener, OnF
 		currencyCache = null;
 		
 	}
+
+	public void focusButton(long l) {
+		
+	}
+
+	@Override
+	public boolean hasStableIds() {
+		return false;
+	}
+
+
 
 	
 }
