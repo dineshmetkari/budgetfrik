@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.AbsoluteLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.GridView;
@@ -93,7 +94,7 @@ public class BudgetFrikActivity extends Activity {
 
 	private Gallery mGallery;
 
-	private TextView catLabel;
+	//private TextView catLabel;
 
 
 //	private static final class EmptyClickListener implements
@@ -241,11 +242,33 @@ public class BudgetFrikActivity extends Activity {
 			FrikPreferencesActivity.PreferenceManager.unsetFirstRun();
 			showDialog(UPDATE_CURRENCIES_DIALOG);
 		}
-		catLabel = (TextView) getLayoutInflater().inflate(R.layout.textlabel, null);
+		//catLabel = (TextView) getLayoutInflater().inflate(R.layout.textlabel, null);
 		//catLabel.setShadowLayer(0.5f, 2, 5, android.R.color.black);
 		//catLabel.setTextColor(android.R.color.white);
 		//catLabel.setBackgroundColor(android.R.color.background_dark);
-		addContentView(catLabel, new AbsoluteLayout.LayoutParams(400,100,0,0));
+		//addContentView(catLabel, new AbsoluteLayout.LayoutParams(400,100,0,0));
+		final List<CurrencyTO> currencies = adapter.getCurrencies();
+		final CurrencyTO defCurrency = currencies.get(
+				currencies.indexOf(new CurrencyTO("",
+				FrikPreferencesActivity
+				.PreferenceManager
+				.getDefaultCurrency(),0.0f,0,"")));
+		final ArrayAdapter<CurrencyTO> currAdapter = new ArrayAdapter<CurrencyTO>(
+				this, android.R.layout.simple_spinner_item, currencies);
+	int pos = currAdapter.getPosition(defCurrency);
+	if (pos != 0 ){
+		currAdapter.remove(defCurrency);
+		currAdapter.insert(defCurrency, 0);
+	}
+	
+	Spinner currLst =  (Spinner)this.findViewById(R.id.LLayout2).findViewById(R.id.ChooseCurrency);
+	currLst.setAdapter(currAdapter);
+	currAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	
+	//Buttons
+	
+	costDetailsListener = new CostDetailsListener(adapter);
+	((Button)this.findViewById(R.id.ButtonsContainer).findViewById(R.id.positive)).setOnClickListener(costDetailsListener);
 	}
 
 	@Override
@@ -577,7 +600,16 @@ public class BudgetFrikActivity extends Activity {
 	public void onIconFocusChange(Map<Categories, Object> map) {
 		//First, display the Name
 		Log.i(TAG, "onIconFocusChange");
-		catLabel.setText(map.get(Categories.TITLE).toString());
+		//catLabel.setText(map.get(Categories.TITLE).toString());
+		
+		//Load the CategoryCombo
+		
+		final ArrayAdapter<CategoryTO> arrayAdapter = new ArrayAdapter<CategoryTO>(
+				this, android.R.layout.simple_spinner_item, 
+				adapter.getSubCategories());
+		arrayAdapter
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		((Spinner) this.findViewById(R.id.ChooseSubCat)).setAdapter(arrayAdapter);
 		
 		//Toast.makeText(this.getApplication(), map.get(Categories.TITLE).toString(), Toast.LENGTH_SHORT).show();
 		//Load the Subcategory list on the combo
