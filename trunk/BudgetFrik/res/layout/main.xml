@@ -23,72 +23,36 @@ android:id="@+id/LLayout2" android:layout_below="@+id/ChooseSubCat">
 
 
 
-<EditText android:id="@+id/Edit_Notes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_below="@+id/Text_Notes" android:scrollbars="horizontal|vertical" android:singleLine="false" android:layout_alignParentBottom="true" android:gravity="top" android:scrollbarAlwaysDrawHorizontalTrack="true" android:scrollbarAlwaysDrawVerticalTrack="true" android:maxEms="5"></EditText>
-
-<TableLayout android:layout_width="wrap_content" 
-android:layout_height="wrap_content" 
-android:id="@+id/Calculator" android:layout_below="@+id/LLayout2" android:layout_alignParentBottom="true">
+<EditText android:id="@+id/Edit_Notes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_below="@+id/Text_Notes" android:scrollbars="horizontal|vertical" android:singleLine="false" android:layout_alignParentBottom="true" android:gravity="top" android:scrollbarAlwaysDrawHorizontalTrack="true" android:scrollbarAlwaysDrawVerticalTrack="true" android:maxEms="5"></EditText><TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Calculator" android:layout_below="@+id/LLayout2" android:layout_alignParentBottom="true">
 <TableRow android:id="@+id/CalcTableRow03" android:layout_width="wrap_content" android:layout_height="wrap_content">
-	<Button android:id="@+id/CalcButton07" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="7"></Button>
-	<Button android:id="@+id/CalcButton08" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="8"></Button>
-	<Button android:id="@+id/CalcButton09" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="9"></Button>
-	<Button android:id="@+id/CalcButtonC" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="c"></Button>
+	<Button android:id="@+id/CalcButton07" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="7"></Button>
+	<Button android:id="@+id/CalcButton08" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8"></Button>
+	<Button android:id="@+id/CalcButton09" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="9"></Button>
+	<Button android:id="@+id/CalcButtonC" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="c"></Button>
 </TableRow>
 <TableRow android:id="@+id/CalcTableRow02" android:layout_width="wrap_content" android:layout_height="wrap_content">
-	<Button android:id="@+id/CalcButton04" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="4"></Button>
-	<Button android:id="@+id/CalcButton05" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="5"></Button>
-	<Button android:id="@+id/CalcButton06" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="6"></Button>
+	<Button android:id="@+id/CalcButton04" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4"></Button>
+	<Button android:id="@+id/CalcButton05" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5"></Button>
+	<Button android:id="@+id/CalcButton06" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6"></Button>
 </TableRow>
 
 <TableRow android:id="@+id/CalcTableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
-	<Button android:id="@+id/CalcButton01" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="1"></Button>
-	<Button android:id="@+id/CalcButton02" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="2"></Button>
-	<Button android:id="@+id/CalcButton03" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="3"></Button>
+	<Button android:id="@+id/CalcButton01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1"></Button>
+	<Button android:id="@+id/CalcButton02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2"></Button>
+	<Button android:id="@+id/CalcButton03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3"></Button>
 </TableRow>
 <TableRow android:id="@+id/CalcTableRow04" android:layout_width="wrap_content" android:layout_height="wrap_content">
-	<Button android:id="@+id/CalcButton0" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="0"></Button>
-	<Button android:id="@+id/CalcButton00" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="00"></Button>
-	<Button android:layout_width="wrap_content" 
-	android:layout_height="wrap_content" 
-	android:text="." android:id="@+id/CalcButtonDot"></Button>
+	<Button android:id="@+id/CalcButton0" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0"></Button>
+	<Button android:id="@+id/CalcButton00" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="00"></Button>
+	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="." android:id="@+id/CalcButtonDot"></Button>
 </TableRow>
-</TableLayout>
+
+
+</TableLayout><RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ButtonsContainer"><Button android:layout_below="@id/Calculator" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/positive" android:capitalize="words" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:text="@string/positive_txt"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/negative" android:capitalize="words" android:layout_below="@+id/Calculator" android:layout_alignParentBottom="true" android:text="@string/negative_txt" android:layout_toRightOf="@+id/positive" android:layout_marginLeft="80px"></Button></RelativeLayout>
+
+
+
+
 
 
 </RelativeLayout>
