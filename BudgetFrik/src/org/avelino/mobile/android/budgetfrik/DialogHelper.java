@@ -26,7 +26,7 @@ public class DialogHelper {
 				.setPositiveButton(android.R.string.ok, costDetailsListener)
 				.setNegativeButton(android.R.string.cancel,EMPTY_CLICK_LISTENER)
 				.setView(textEntryView).create();
-		costDetailsListener.setAlertDialog(dialog);
+		//costDetailsListener.setAlertDialog(dialog);
 		// Button 00,0-9,. just append the face value
 		for (int btnId : CalcButtonListener.CALC_BTNS) {
 			((Button) textEntryView.findViewById(btnId))
