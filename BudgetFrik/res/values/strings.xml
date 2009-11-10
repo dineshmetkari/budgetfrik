@@ -44,4 +44,6 @@
 	<string name="total_exp">Total Expenses:</string>
 	<string name="currency_txt">Currency:</string>
 	
+	<string name="positive_txt">New Expense</string>
+	<string name="negative_txt">Clear</string>
 </resources>
