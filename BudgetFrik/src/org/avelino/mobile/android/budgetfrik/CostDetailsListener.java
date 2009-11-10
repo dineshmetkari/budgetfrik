@@ -29,7 +29,7 @@ import android.widget.Toast;
  *
  */
 public final class CostDetailsListener implements
-		DialogInterface.OnClickListener {
+		View.OnClickListener {
 	private static final NumberFormat NUMBER_INSTANCE = DecimalFormat.getNumberInstance();
 	@SuppressWarnings("unused")
 	private static final String TAG = "CostDetailsListener";
@@ -52,12 +52,11 @@ public final class CostDetailsListener implements
 		this.entry = entry;
 	}
 
-	public void onClick(DialogInterface di,
-			int whichButton) {
-		final Spinner subcat = (Spinner) dialog.findViewById(R.id.ChooseSubCat);
-		final Spinner currency = (Spinner) dialog.findViewById(R.id.ChooseCurrency);
-		final EditText cost = (EditText) dialog.findViewById(R.id.Edit_Value);
-		final EditText notes = (EditText) dialog.findViewById(R.id.Edit_Notes);
+	public void onClick(View view) {
+		final Spinner subcat = (Spinner) view.findViewById(R.id.ChooseSubCat);
+		final Spinner currency = (Spinner) view.findViewById(R.id.ChooseCurrency);
+		final EditText cost = (EditText) view.findViewById(R.id.Edit_Value);
+		final EditText notes = (EditText) view.findViewById(R.id.Edit_Notes);
 		final CategoryTO catTo = (CategoryTO) subcat.getAdapter().getItem(subcat.getSelectedItemPosition());
 		final CurrencyTO currTo = (CurrencyTO)currency.getAdapter().getItem(currency.getSelectedItemPosition());
 		final String noteVal = notes.getText().toString();
@@ -76,24 +75,25 @@ public final class CostDetailsListener implements
 				entry.setNotes(noteVal);
 				adapter.updateEntry(entry);
 			}
-			Toast.makeText(dialog.getContext(), "Expense Saved", Toast.LENGTH_SHORT).show();
+			Toast.makeText(view.getContext(), "Expense Saved", Toast.LENGTH_SHORT).show();
 		} catch (ParseException e) {
 			Log.w("CastDetailListener", "Parsing cost value" ,e);
-			Toast.makeText(((Dialog)di).getContext(), "Invalid value in Expense Amount", Toast.LENGTH_LONG).show();
+			//TODO Fix Toast.makeText(view).getContext(), "Invalid value in Expense Amount", Toast.LENGTH_LONG).show();
 		}
 	}
 
-	private AlertDialog dialog;
+	private View view;
 	private Button okBtn;
-	public void setAlertDialog(final AlertDialog dialog){
-		this.dialog = dialog;
+	public void setView(final View view){
+		this.view = view;
 	}
 	public void	onPrepare() {
-		final ViewGroup layoutSuperContainer = (ViewGroup) dialog.findViewById(R.id.enterdetailsLayout).getRootView();
+		final ViewGroup layoutSuperContainer = (ViewGroup) view.findViewById(R.id.ButtonsContainer).getRootView();
+		
 		okBtn = Utils.findViewInHierarchy(layoutSuperContainer, Button.class, new Clause<Button, Boolean>(){
 		
 		public Boolean evaluate(Button k) {
-		return dialog.getContext().getText(android.R.string.ok).equals(k.getText());
+			return view.getContext().getText(R.string.positive_txt).equals(k.getText());
 		}});
 		final EditText textView = (EditText)layoutSuperContainer.findViewById(R.id.Edit_Value);
 		if (okBtn != null){
