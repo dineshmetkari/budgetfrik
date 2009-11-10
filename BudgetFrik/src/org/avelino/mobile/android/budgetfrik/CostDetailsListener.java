@@ -12,6 +12,7 @@ import org.avelino.mobile.android.budgetfrik.Utils.Clause;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.text.Editable;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
@@ -29,7 +30,7 @@ import android.widget.Toast;
  *
  */
 public final class CostDetailsListener implements
-		View.OnClickListener {
+		View.OnClickListener, OnClickListener {
 	private static final NumberFormat NUMBER_INSTANCE = DecimalFormat.getNumberInstance();
 	@SuppressWarnings("unused")
 	private static final String TAG = "CostDetailsListener";
@@ -51,7 +52,14 @@ public final class CostDetailsListener implements
 		this.adapter = adapter;
 		this.entry = entry;
 	}
-
+	
+	public void onClick(DialogInterface dialog, int which) {
+		if (which == DialogInterface.BUTTON1 && dialog instanceof View){
+			onClick((View) dialog);
+		}
+		
+	}
+	
 	public void onClick(View view) {
 		final Spinner subcat = (Spinner) view.findViewById(R.id.ChooseSubCat);
 		final Spinner currency = (Spinner) view.findViewById(R.id.ChooseCurrency);
@@ -136,4 +144,7 @@ public final class CostDetailsListener implements
 	public void setEntry(EntryTO entry) {
 		this.entry = entry;
 	}
+
+
+	
 }
